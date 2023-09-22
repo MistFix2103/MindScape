@@ -1,0 +1,42 @@
+@startuml
+
+class User {
+}
+
+class Expert {
+}
+
+class Researcher {
+}
+
+class Moderator {
+}
+
+class Story {
+}
+
+class Comment {
+}
+
+class StoryUsageRequest {
+}
+
+class Conversation {
+}
+
+User --> Story
+User --> Comment
+Expert --> Comment
+Researcher --> StoryUsageRequest
+Researcher -- User
+Researcher --> Conversation
+
+Story --> Comment
+Story --> StoryUsageRequest
+
+Moderator --> Story
+Moderator --> Comment
+Moderator --> Expert
+Moderator --> Researcher
+
+@enduml

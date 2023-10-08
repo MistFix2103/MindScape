@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <!-- Подключение css-файла и иконки -->
+    <link rel="stylesheet" th:href="@{/css/registration.css}">
+    <link rel="icon" href="images/favicon.ico">
+    <!-- Фон для страницы (иначе не работает) -->
+    <style>
+        body {
+            background-image: url(images/background_reg.jpg);
+        }
+    </style>
+</head>
+<body>
+    <h1>Регистрация</h1>
+    <h2>Выберите, кем Вы хотите быть на нашем сервисе:</h2>
+    <!-- Контейнер для ролей -->
+    <div class="container">
+        <!-- Роль: пользователь -->
+        <div class="user">
+            <span class="header1">Пользователь</span>
+            <img src="images/user.png" alt="user-logo" id="user-logo">
+            <span class="user_desc">
+                Для обычных пользователей MindScape предоставляет безопасное пространство для выражения своих чувств и проблем без страха осуждения.
+                Пользователи могут получать качественные советы и поддержку как от психологов, так и от обычных людей.
+            </span>
+            <button class="custom-button" id="sel_user">Выбрать</button>
+        </div>
+
+        <!-- Роль: психолог -->
+        <div class="psychologist">
+            <span class="header2">Психолог</span>
+            <img src="images/psychologist.png" alt="psychologist-logo" id="psychologist-logo">
+            <span class="psychologist_desc">
+                Для психологов MindScape — это не только площадка для практики и совершенствования навыков психологической помощи,
+                но и возможность для расширения клиентской базы.
+                <p> После регистрации необходимо пройти верификацию. </p>
+            </span>
+            <button class="custom-button" id="sel_psychologist">Отключено</button>
+        </div>
+
+        <!-- Роль: исследователь -->
+        <div class="researcher">
+            <span class="header3">Исследователь</span>
+            <img src="images/researcher.png" alt="researcher-logo" id="researcher-logo">
+            <span class="researcher_desc">
+                Для исследователей MindScape позволяет собирать данные для своих научных работ и сотрудничать с другими исследователями.
+                Более того, взаимовыгодное сотрудничество с сервисом может включать публикацию результатов исследований на платформе.
+                <p> После регистрации необходимо пройти верификацию. </p>
+            </span>
+            <button class="custom-button" id="sel_researcher">Отключено</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -22,18 +22,21 @@ body {
 
 .container {
     position: absolute;
-    width: 25.2vw;
-    height: 40vh;
+    width: 28vw;
+    height: 53vh;
     border-radius: 20px;
     background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 10px 17px rgba(0, 0, 0, 0.7);
-    max-width: 372px;
-    min-width: 372px;
-    max-height: 310px;
-    min-height: 310px;
+}
+
+.container {
+    min-width: 413px;
+    max-width: 413px;
+    max-height: 400px;
+    min-height: 400px;
 }
 
 .logo-container {
@@ -49,51 +52,43 @@ body {
 }
 
 .logo-container h1 {
+    margin-top: 20px;
+    font-size: 18px;
     font: Montserrat Bold;
-    font-size: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-box {
+.reg-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
 
-#userEmail, #userPassword {
+.reg-box input::placeholder {
+    font-family: 'Comfortaa', sans-serif;
+}
+
+#userEmail, #userPassword, #username, #userPassword1 {
     padding: 10px;
     font-size: 16px;
     font: Montserrat Thin;
-    width: 19vw;
-    height: 22px;
+    width: 22vw;
+    height: 18px;
     margin-bottom: 15px;
     border-radius: 20px;
     border: 1px solid;
     font-family: 'Comfortaa', sans-serif;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    max-width: 280px;
-    min-width: 280px;
-}
-
-.login-box input::placeholder {
-    font-family: 'Comfortaa', sans-serif;
-}
-
-.forgot-password a {
-    font-size: 15px;
-    color: #6A9ACD;
-    text-decoration: none;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
+    max-width: 324px;
+    min-width: 324px;
 }
 
 .button-container {
     margin-top: 30px;
 }
 
-#login, #register {
+#back, #register {
     font-family: 'Comfortaa', sans-serif;
     padding: 10px 30px;
     border: none;
@@ -104,23 +99,16 @@ body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-#login {
-    background: linear-gradient(135deg, #FFC0CB, #8A2BE2);
-    color: white;
-    margin-left: 15px;
-}
-
 #register {
-   background: linear-gradient(135deg, #AEDFF7, #6A9ACD);
-    color: white;
+    background: linear-gradient(45deg, #5bc0de, #88dffa);
+    margin-right: 15px;
 }
 
-#login:hover {
+#register:hover {
     transform: scale(1.05);
-    background: linear-gradient(135deg, #FFAEC1, #7A1DC2);
+    background: linear-gradient(45deg, #49aad9, #6ccff6);
 }
 
- #register:hover {
+#back:hover {
     transform: scale(1.05);
-    background: linear-gradient(135deg, #89BFE3, #568AB0);
- }
+}

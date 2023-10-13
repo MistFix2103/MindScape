@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" th:href="@{/css/user_reg.css}">
+    <title>Регистрация</title>
+    <!-- Фон для страницы (иначе не работает) -->
+    <style>
+        body {
+            background-image: url(images/user_reg_bg.png);
+        }
+    </style>
+</head>
+<body>
+    <!-- Общий контейнер со всеми элементами -->
+    <div class="container">
+        <!-- Лого + "регистрация" -->
+        <div class="logo-container">
+            <img src="images/logo.png" alt="logo" id="logo">
+            <h1 >Регистрация</h1>
+        </div>
+
+        <!-- Поля для ввода информации -->
+        <div class="reg-box">
+            <input type="email" id="username" name="name" required placeholder="Ваше имя">
+            <input type="email" id="userEmail" name="email" required placeholder="Ваша почта">
+            <input type="password" id="userPassword" name="password" required placeholder="Пароль">
+            <input type="password" id="userPassword1" name="password" required placeholder="Повторите пароль">
+        </div>
+
+        <!-- Кнопки "Регистрация" и "Назад" -->
+        <div class="button-container">
+            <button class="custom-button" id="register">Создать аккаунт</button>
+            <button class="custom-button" id="back">Назад</button>
+        </div>
+    </div>
+    <script src="js/user_reg.js"></script>
+</body>
+</html>

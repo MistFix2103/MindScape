@@ -14,4 +14,9 @@ public class ReqController {
     public String showRegistrationPage() {
         return "registration";
     }
+
+    @GetMapping("/user_registration")
+    public String showUserRegistrationPage() {
+        return "user_registration";
+    }
 }

@@ -14,7 +14,7 @@ import ru.mtuci.MindScape.auth.service.AuthenticationService;
 public class LoginController {
 
     @Autowired
-    private AuthenticationService authenticationService; // ваш сервис для аутентификации
+    private AuthenticationService authenticationService;
 
     @PostMapping
     public ResponseEntity<?> authenticateUser(@RequestParam String email, @RequestParam String password) {

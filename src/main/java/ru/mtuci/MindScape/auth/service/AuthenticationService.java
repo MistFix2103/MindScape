@@ -11,18 +11,16 @@ import java.util.Optional;
 public class AuthenticationService {
 
     @Autowired
-    private UserRepository userRepository; // ваш репозиторий для доступа к данным пользователя
+    private UserRepository userRepository;
 
     public boolean authenticate(String email, String password) {
-        // Нахождение пользователя по email
         Optional<User> userOptional = userRepository.findByEmail(email);
 
         if (userOptional.isEmpty()) {
-            return false; // Если пользователь не найден, возвращаем false
+            return false;
         }
 
         User user = userOptional.get();
-        // Сравнение пароля (лучше использовать шифрованные пароли и сравнивать их после дешифрования)
         return user.getPassword().equals(password);
     }
 }

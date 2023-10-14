@@ -79,6 +79,10 @@ body {
     font-family: 'Comfortaa', sans-serif;
 }
 
+.forgot-password {
+    text-align: center;
+}
+
 .forgot-password a {
     font-size: 15px;
     color: #6A9ACD;
@@ -89,8 +93,15 @@ body {
     text-decoration: underline;
 }
 
-.button-container {
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
     margin-top: 30px;
+}
+
+.buttons-container a {
+    text-decoration: none;
 }
 
 #login, #register {

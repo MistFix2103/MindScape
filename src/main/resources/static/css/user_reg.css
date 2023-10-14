@@ -88,7 +88,7 @@ body {
     margin-top: 30px;
 }
 
-#back, #register {
+#back, #registration {
     font-family: 'Comfortaa', sans-serif;
     padding: 10px 30px;
     border: none;
@@ -99,12 +99,12 @@ body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-#register {
+#registration {
     background: linear-gradient(45deg, #5bc0de, #88dffa);
     margin-right: 15px;
 }
 
-#register:hover {
+#registration:hover {
     transform: scale(1.05);
     background: linear-gradient(45deg, #49aad9, #6ccff6);
 }

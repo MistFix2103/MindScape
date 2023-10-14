@@ -1,7 +1,8 @@
-package ru.mtuci.MindScape.models;
+package ru.mtuci.MindScape.story.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.mtuci.MindScape.user.model.Researcher;
 
 @Entity
 @Data

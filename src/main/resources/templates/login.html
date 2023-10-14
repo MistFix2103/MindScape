@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindScape | Добро пожаловать!</title>
     <!-- Подключение css-файла и иконки -->
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
     <link rel="icon" href="/images/favicon.ico">
     <!-- Фон для страницы (иначе не работает) -->
     <style>
@@ -15,33 +15,32 @@
     </style>
 </head>
 <body>
-        <!-- Общий контейнер со всеми элементами -->
-        <div class="container">
+<div class="container">
+    <!-- Лого + название сервиса -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="logo" id="logo">
+        <h1>MindScape</h1>
+    </div>
 
-            <!-- Лого + название сервиса -->
-            <div class="logo-container">
-                <img src="images/logo.png" alt="logo" id="logo">
-                <h1>MindScape</h1>
-            </div>
-
-            <!-- Поля для ввода почты и пароля -->
-            <div class="login-box">
-                    <input type="email" id="userEmail" name="email" required placeholder="E-mail">
-                    <input type="password" id="userPassword" name="password" required placeholder="Пароль">
-            </div>
-
-            <!-- Забыли пароль? -->
-            <div class="forgot-password">
-                <a href="">Забыли пароль?</a>
-            </div>
-
-            <!-- Кнопки "регистрация" и "войти" -->
-            <div class="button-container">
-                <button class="custom-button" id="register">Регистрация</button>
-                <button class="custom-button" id="login">Войти</button>
-            </div>
+    <!-- Форма для ввода логина и пароля -->
+    <form th:action="@{/login}" method="post">
+        <div class="login-box">
+            <input type="email" id="userEmail" name="email" required placeholder="E-mail">
+            <input type="password" id="userPassword" name="password" required placeholder="Пароль">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         </div>
-     <!-- Чтобы работали кнопки -->
-    <script src="js/login.js"></script>
+
+        <!-- Забыли пароль? -->
+        <div class="forgot-password">
+            <a href="">Забыли пароль?</a>
+        </div>
+
+        <!-- Кнопки "регистрация" и "войти" -->
+        <div class="buttons-container">
+            <button class="custom-button" type="submit" id="login">Войти</button>
+            <a th:href="@{/registration}" class="custom-button" id="register">Регистрация</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

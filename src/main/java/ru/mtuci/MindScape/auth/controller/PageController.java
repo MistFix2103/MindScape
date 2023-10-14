@@ -1,11 +1,13 @@
-package ru.mtuci.MindScape.controller;
+package ru.mtuci.MindScape.auth.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ReqController {
-    @GetMapping("/")
+@RequestMapping("/")
+public class PageController {
+    @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
@@ -18,5 +20,10 @@ public class ReqController {
     @GetMapping("/user_registration")
     public String showUserRegistrationPage() {
         return "user_registration";
+    }
+
+    @GetMapping("/home")
+    public String home() {
+        return "home";
     }
 }

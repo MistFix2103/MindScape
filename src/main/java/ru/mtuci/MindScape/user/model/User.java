@@ -1,23 +1,25 @@
-package ru.mtuci.MindScape.models;
+package ru.mtuci.MindScape.user.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import ru.mtuci.MindScape.story.model.Story;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -33,4 +35,8 @@ public class User {
 
     @OneToMany(mappedBy = "author")
     private Set<Story> stories = new HashSet<>();
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name ="role")
+    private UserRole role;
 }

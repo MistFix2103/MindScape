@@ -21,7 +21,8 @@ body {
 h1, h2 {
     text-align: center;
     margin-top: 20px;
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
 h1 {
@@ -79,6 +80,8 @@ h2 {
 
 .header1, .header2, .header3 {
     display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
 #user-logo, #psychologist-logo, #researcher-logo {
@@ -94,10 +97,9 @@ h2 {
     line-height: 1.6;
     font-weight: normal;
     font-size: 15px;
-}
-
-.psychologist_desc, .researcher_desc {
     margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
 }
 
 #sel_user, #sel_psychologist, #sel_researcher {

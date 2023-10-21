@@ -30,9 +30,7 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/user_registration").permitAll()
+                        .requestMatchers("/login", "/registration/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
@@ -42,6 +40,7 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/home", true))
                 .logout(form -> form
+                        .logoutSuccessUrl("/login?logout=true")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).permitAll()
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)

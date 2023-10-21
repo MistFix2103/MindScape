@@ -25,9 +25,19 @@ public class PageController {
         return "registration";
     }
 
-    @GetMapping("/user_registration")
+    @GetMapping("/registration/user")
     public String showUserRegistrationPage() {
-        return "user_registration";
+        return "user";
+    }
+
+    @GetMapping("/registration/expert")
+    public String showExpertRegistrationPage() {
+        return "expert";
+    }
+
+    @GetMapping("/registration/researcher")
+    public String showResearcherRegistrationPage() {
+        return "researcher";
     }
 
     @Autowired
@@ -44,6 +54,6 @@ public class PageController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        return "redirect:/login";
+        return "redirect:/login?logout=true";
     }
 }

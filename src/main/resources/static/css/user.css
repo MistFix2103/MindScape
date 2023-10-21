@@ -59,6 +59,18 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.error-container {
+    height: 20px;
+}
+
+.error-message {
+    color: red;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 7px;
+}
+
 .reg-box {
     display: flex;
     flex-direction: column;
@@ -87,7 +99,13 @@ body {
 }
 
 .button-container {
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+#back {
+    display: inline-block;
+    color: black;
+    text-decoration: none;
 }
 
 #back, #registration {
@@ -112,5 +130,5 @@ body {
 }
 
 #back:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); !important
 }

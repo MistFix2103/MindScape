@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
     <!-- Подключение css-файла и иконки -->
-    <link rel="icon" href="images/favicon.ico">
-    <link rel="stylesheet" th:href="@{/css/user_reg.css}">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" th:href="@{/css/user.css}">
     <!-- Фон для страницы (иначе не работает) -->
     <style>
         body {
-            background-image: url(images/user_reg_bg.png);
+            background-image: url(/images/user_reg_bg.png);
         }
     </style>
     <!-- Шрифты -->
@@ -22,11 +22,18 @@
     <div class="container">
         <!-- Лого + "регистрация" -->
         <div class="logo-container">
-            <img src="images/logo.png" alt="logo" id="logo">
+            <img src="/images/logo.png" alt="logo" id="logo">
             <h1 >Регистрация</h1>
         </div>
 
-        <form th:action="@{/user_registration/register}" method="post" onsubmit="return validateForm()">
+        <!-- Поле для вывода ошибок -->
+        <div class="error-container">
+            <div th:if="${error}" class="error-message">
+                <span th:text="${error}"></span>
+            </div>
+        </div>
+
+        <form th:action="@{/registration/user}" method="post">
             <!-- Поля для ввода информации -->
             <div class="reg-box">
                 <input type="text" id="username" name="name" required placeholder="Ваше имя">
@@ -41,10 +48,9 @@
             <!-- Контейнер для кнопок -->
             <div class="button-container">
                 <button class="custom-button" id="registration">Создать аккаунт</button>
-                <button type="button" class="custom-button" id="back">Назад</button>
+                <a href="javascript:history.back()" class="custom-button" id="back">Назад</a>
             </div>
         </form>
     </div>
-    <script src="js/user_reg.js"></script>
 </body>
 </html>

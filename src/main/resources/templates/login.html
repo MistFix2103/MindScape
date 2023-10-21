@@ -15,7 +15,7 @@
     </style>
     <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -23,6 +23,16 @@
     <div class="logo-container">
         <img src="images/logo.png" alt="logo" id="logo">
         <h1>MindScape</h1>
+    </div>
+
+    <!-- Блок для отображения ошибок -->
+    <div class="info-container">
+        <div th:if="${param.error}" class="error-msg">
+            Неверный логин или пароль.
+        </div>
+        <div th:if="${param.logout}" class="logout-msg">
+            Вы успешно вышли из системы.
+        </div>
     </div>
 
     <!-- Форма для ввода логина и пароля -->

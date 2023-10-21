@@ -20,9 +20,7 @@ public class RegistrationService {
 
     @Transactional
     public void register(UserRegistrationDto registrationDto) {
-        if (userRepository.existsByEmail(registrationDto.getEmail())) {
-            throw new RuntimeException("Почта уже существует!");
-        }
+        validateRegistration(registrationDto);
 
         User user = new User();
         user.setUsername(registrationDto.getName());
@@ -31,5 +29,19 @@ public class RegistrationService {
         user.setRole(UserRole.USER);
 
         userRepository.save(user);
+    }
+
+    private void validateRegistration(UserRegistrationDto registrationDto) {
+        if (userRepository.existsByEmail(registrationDto.getEmail())) {
+            throw new RuntimeException("EmailExists");
+        }
+
+        if (registrationDto.getPassword().length() < 6) {
+            throw new RuntimeException("PasswordTooShort");
+        }
+
+        if (!registrationDto.getPassword().equals(registrationDto.getConfirmPassword())) {
+            throw new RuntimeException("PasswordsDoNotMatch");
+        }
     }
 }

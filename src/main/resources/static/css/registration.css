@@ -102,7 +102,7 @@ h2 {
     font-weight: 300;
 }
 
-#sel_user, #sel_psychologist, #sel_researcher {
+#sel_user, #sel_expert, #sel_researcher {
     font-family: 'Comfortaa', sans-serif;
     padding: 10px 30px;
     border: none;
@@ -115,8 +115,10 @@ h2 {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     background: linear-gradient(135deg, #b9a1e2, #a0bef5);
     color: white;
+    text-decoration: none;
+    display: inline-block;
 }
 
-#sel_user:hover, #sel_psychologist:hover, #sel_researcher:hover {
+#sel_user:hover, #sel_expert:hover, #sel_researcher:hover {
     background: linear-gradient(135deg, #a68fd0, #8daee5);
 }

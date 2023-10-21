@@ -30,12 +30,14 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests((authz) -> authz
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/user_registration/**").permitAll()
+                        .requestMatchers("/user_registration").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
+                        .failureUrl("/login?error=true")
                         .usernameParameter("email")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/home", true))

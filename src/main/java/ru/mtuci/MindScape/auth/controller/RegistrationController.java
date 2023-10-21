@@ -21,7 +21,6 @@ public class RegistrationController {
             model.addAttribute("errorMessage", "Пароли не совпадают!");
             return "user_registration";
         }
-
         registrationService.register(registrationDto);
         return "redirect:/home";
     }

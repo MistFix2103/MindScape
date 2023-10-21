@@ -23,4 +23,7 @@ public class AuthenticationService {
         User user = userOptional.get();
         return user.getPassword().equals(password);
     }
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

@@ -97,14 +97,22 @@ body {
     visibility: visible;
 }
 
-.dropdown-content a {
+.dropdown-content a, #logout {
     text-decoration: none;
     padding: 12px;
     color: black;
     transition: color 0.4s ease;
 }
 
-.dropdown-content a:hover {
+#logout {
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+.dropdown-content a:hover, #logout:hover {
     color: rgb(160, 160, 160);
 }
 

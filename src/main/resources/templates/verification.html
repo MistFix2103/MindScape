@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Верификация</title>
+    <!-- Подключение css-файла и иконки -->
+    <link rel="stylesheet" th:href="@{/css/verification.css}">
+    <link rel="icon" th:href="@{/images/favicon.ico}">
+    <!-- Фон для страницы (иначе не работает) -->
+    <style>
+        body {
+            background-image: url(/images/background_reg.jpg);
+        }
+    </style>
+     <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Общий контейнер со всеми элементами -->
+    <div class="container">
+        <div class="logo-container">
+            <img th:src="@{/images/logo.png}" alt="logo" id="logo">
+            <h1>Регистрация</h1>
+        </div>
+
+        <p>На указанную Вами почту был выслан код, введите его для подтверждения регистрации. Код действителен 30 минут.</p>
+
+        <!-- Поле для ошибок -->
+        <div class="error-msg">
+            <div th:if="${error}" class="error-message">
+                <span th:text="${error}"></span>
+            </div>
+        </div>
+
+        <!-- Поле для ввода кода и кнопка подтверждения -->
+        <form action="/registration/verification" method="post">
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="text" id="code" name="code" required placeholder="Код из письма">
+            <button class="enter_code" type="submit">Подтвердить</button>
+        </form>
+
+        <!-- Повторная отправка кода -->
+        <a th:href="@{/registration/resendCode(email=${email}, role=${role})}">⟳ Отправить еще раз</a>
+    </div>
+</body>
+
+</html>

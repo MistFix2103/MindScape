@@ -1,0 +1,119 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.container {
+    position: absolute;
+    border-radius: 20px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 17px rgba(0, 0, 0, 0.7);
+}
+
+.container {
+    min-width: 413px;
+    max-width: 413px;
+    max-height: 270px;
+    min-height: 270px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#logo {
+    width: 40px;
+    height: 31px;
+    margin-right: 10px;
+}
+
+.logo-container h1 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 1px 30px;
+    margin-top: -3px;
+}
+
+#code {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    width: 22vw;
+    height: 18px;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid;
+    font-family: 'Comfortaa', sans-serif;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    max-width: 324px;
+    min-width: 324px;
+}
+
+.error-msg {
+    height: 20px;
+    margin: -10px;
+}
+
+a {
+    text-decoration: none;
+    color: #0000FF;
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.enter_code {
+    font-family: 'Comfortaa', sans-serif;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.7s;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #b9a1e2, #a0bef5);
+    color: white;
+}
+
+.enter_code:hover {
+    background: linear-gradient(135deg, #a68fd0, #8daee5);
+}

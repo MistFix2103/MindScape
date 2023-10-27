@@ -20,6 +20,11 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/login/forgot_password")
+    public String showPassRecoverPage() {
+        return "forgot_password";
+    }
+
     @GetMapping("/registration")
     public String showRegistrationPage() {
         return "registration";
@@ -50,10 +55,5 @@ public class PageController {
         String username = user.get().getUsername();
         model.addAttribute("username", username);
         return "home";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        return "redirect:/login?logout=true";
     }
 }

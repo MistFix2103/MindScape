@@ -33,8 +33,8 @@ body {
 .container {
     min-width: 413px;
     max-width: 413px;
-    max-height: 270px;
-    min-height: 270px;
+    max-height: 280px;
+    min-height: 280px;
 }
 
 .logo-container {
@@ -85,12 +85,16 @@ p {
 .error-msg {
     height: 20px;
     margin: -10px;
+    color: red;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
 }
 
 a {
     text-decoration: none;
     color: #0000FF;
-    margin-top: 10px;
+    margin-top: 15px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     font-size: 14px;
@@ -98,6 +102,12 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .enter_code {
@@ -108,12 +118,13 @@ a:hover {
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    transition: background 0.7s;
+    transition: transform 0.7s, background-color 0.7s;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     background: linear-gradient(135deg, #b9a1e2, #a0bef5);
     color: white;
 }
 
 .enter_code:hover {
-    background: linear-gradient(135deg, #a68fd0, #8daee5);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #a68fd0, #8daee5); !important
 }

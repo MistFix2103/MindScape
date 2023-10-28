@@ -45,6 +45,11 @@ public class PageController {
         return "researcher";
     }
 
+    @GetMapping("/registration/verification")
+    public String showVerificationRegistrationPage() {
+        return "verification";
+    }
+
     @Autowired
     private UserRepository userRepository;
 

@@ -38,8 +38,8 @@
             <div class="reg-box">
                 <input type="text" id="username" name="name" required placeholder="Ваше имя">
                 <input type="email" id="userEmail" name="email" required placeholder="Ваша почта">
-                <input type="password" id="userPassword" name="password" required placeholder="Пароль">
-                <input type="password" id="userPassword1" name="confirmPassword" required placeholder="Повторите пароль">
+                <input type="password" id="userPassword" name="password" required placeholder="Пароль" autocomplete="off">
+                <input type="password" id="userPassword1" name="confirmPassword" required placeholder="Повторите пароль" autocomplete="off">
 
                 <!-- CSRF token -->
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />

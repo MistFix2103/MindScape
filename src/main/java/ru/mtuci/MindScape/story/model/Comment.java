@@ -18,13 +18,13 @@ public class Comment {
     @NotBlank
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    //@ManyToOne
+    //@JoinColumn(name = "author_id")
+    //private User author;
 
-    @ManyToOne
-    @JoinColumn(name = "story_id")
-    private Story story;
+    //@ManyToOne
+    //@JoinColumn(name = "story_id")
+    //private Story story;
 
     private LocalDateTime time;
 }

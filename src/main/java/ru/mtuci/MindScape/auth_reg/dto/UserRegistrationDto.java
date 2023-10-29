@@ -1,4 +1,4 @@
-package ru.mtuci.MindScape.auth.dto;
+package ru.mtuci.MindScape.auth_reg.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

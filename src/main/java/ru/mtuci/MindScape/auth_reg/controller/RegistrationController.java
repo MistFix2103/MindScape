@@ -1,16 +1,16 @@
-package ru.mtuci.MindScape.auth.controller;
+package ru.mtuci.MindScape.auth_reg.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.mtuci.MindScape.auth.dto.UserRegistrationDto;
-import ru.mtuci.MindScape.auth.service.RegistrationService;
+import ru.mtuci.MindScape.auth_reg.dto.UserRegistrationDto;
+import ru.mtuci.MindScape.auth_reg.service.RegistrationService;
 
 import javax.validation.Valid;
+import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 
 @Controller
 @RequestMapping("/registration")
@@ -24,26 +24,35 @@ public class RegistrationController {
             registrationService.preRegister(registrationDto);
             session.setAttribute("registrationDto", registrationDto);
             return "redirect:/registration/verification";
-        } catch (RuntimeException e) {
-            String errorCode = e.getMessage();
-            String errorMessage = errorMessage(errorCode);
-            model.addAttribute("error", errorMessage);
+        } catch (EmailExistsException | PasswordTooShortException | PasswordsDoNotMatchException e) {
+            model.addAttribute("error", e.getMessage());
+            return "user";
+        } catch (Exception e) {
+            System.err.println("Неизвестная ошибка: " + e.getMessage());
+            model.addAttribute("error", "Неизвестная ошибка!");
             return "user";
         }
     }
 
     @PostMapping("/verification")
-    public String register(@Valid @ModelAttribute UserRegistrationDto registrationDto, Model model, HttpSession session) {
+    public String register(@Valid @ModelAttribute UserRegistrationDto registrationDto, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         UserRegistrationDto registrationDtoFromSession = (UserRegistrationDto) session.getAttribute("registrationDto");
+
+        if (registrationDtoFromSession == null) {
+            model.addAttribute("error", "Произошла ошибка сессии. Попробуйте заново.");
+            model.addAttribute("operationType", "registration");
+            return "verification";
+        }
+
         registrationDtoFromSession.setCode(registrationDto.getCode());
         try {
             registrationService.validateCode(registrationDtoFromSession.getEmail(), registrationDtoFromSession.getCode());
             registrationService.register(registrationDtoFromSession);
+            redirectAttributes.addFlashAttribute("message", "Вы успешно зарегистрировались!");
             return "redirect:/login";
-        } catch (RuntimeException e) {
-            String errorCode = e.getMessage();
-            String errorMessage = errorMessage(errorCode);
-            model.addAttribute("error", errorMessage);
+        } catch (InvalidCodeException | CodeExpiredException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("operationType", "registration");
             return "verification";
         }
     }
@@ -54,24 +63,16 @@ public class RegistrationController {
 
         if (registrationDto == null || registrationDto.getEmail() == null) {
             model.addAttribute("error", "Не удалось повторно отправить код. Пожалуйста, попробуйте снова.");
+            model.addAttribute("operationType", "registration");
             return "verification";
         }
+
         try {
-            registrationService.resendCode(registrationDto.getEmail());
+            registrationService.resendCode(registrationDto.getEmail(), 1);
         } catch (Exception e) {
             model.addAttribute("error", "Произошла ошибка при повторной отправке кода.");
         }
+        model.addAttribute("operationType", "registration");
         return "verification";
-    }
-
-    private String errorMessage(String errorCode) {
-        return switch (errorCode) {
-            case "EmailExists" -> "Пользователь с такой почтой уже существует!";
-            case "PasswordTooShort" -> "Пароль слишком короткий!";
-            case "PasswordsDoNotMatch" -> "Пароли не совпадают!";
-            case "InvalidCode" -> "Неверный код!";
-            case "CodeExpired" -> "Код устарел!";
-            default -> "Неизвестная ошибка!";
-        };
     }
 }

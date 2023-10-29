@@ -1,10 +1,12 @@
-package ru.mtuci.MindScape.auth.service;
+package ru.mtuci.MindScape.auth_reg.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import ru.mtuci.MindScape.user.repository.ConfirmationCodeRepository;
 
 @Service
 public class EmailService {
@@ -36,6 +38,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
+    @Transactional
     public void sendCodeEmail(String to, String code, int role) {
         String subject = "";
         String text = switch (role) {

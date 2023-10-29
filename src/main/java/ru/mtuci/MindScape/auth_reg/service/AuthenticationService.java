@@ -1,4 +1,4 @@
-package ru.mtuci.MindScape.auth.service;
+package ru.mtuci.MindScape.auth_reg.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

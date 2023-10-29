@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/login/**", "/registration/**").permitAll()
+                        .requestMatchers("/login/**", "/registration/**", "/forgot_password/**").permitAll()
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form

@@ -22,10 +22,6 @@ public class ConfirmationCode {
     private String code;
     private LocalDateTime expirationDate;
     private String email;
-    private boolean confirmed;
-
-    @OneToOne
-    private User user;
 
     @Enumerated(EnumType.STRING)
     private Type type;

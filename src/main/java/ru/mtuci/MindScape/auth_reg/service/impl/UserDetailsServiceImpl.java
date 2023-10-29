@@ -1,6 +1,6 @@
-package ru.mtuci.MindScape.auth.service.impl;
+package ru.mtuci.MindScape.auth_reg.service.impl;
 
-import ru.mtuci.MindScape.auth.dto.UserDetailsImpl;
+import ru.mtuci.MindScape.auth_reg.dto.UserDetailsImpl;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

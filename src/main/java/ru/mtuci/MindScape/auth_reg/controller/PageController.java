@@ -1,6 +1,5 @@
-package ru.mtuci.MindScape.auth.controller;
+package ru.mtuci.MindScape.auth_reg.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -46,13 +45,19 @@ public class PageController {
     }
 
     @GetMapping("/registration/verification")
-    public String showVerificationRegistrationPage() {
+    public String showVerificationRegistrationPage(Model model) {
+        model.addAttribute("operationType", "registration");
+        return "verification";
+    }
+
+    @GetMapping("/forgot_password/verification")
+    public String showVerificationPassRecoverPage(Model model){
+        model.addAttribute("operationType", "recovery");
         return "verification";
     }
 
     @Autowired
     private UserRepository userRepository;
-
     @GetMapping("/home")
     public String home(Authentication authentication, Model model) {
         String email = authentication.getName();

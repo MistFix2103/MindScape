@@ -58,11 +58,18 @@ body {
     height: 20px;
 }
 
-.error-msg, .logout-msg {
-    color: red;
+.error-msg, .logout-msg, .msg {
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     font-size: 14px;
+}
+
+.error-msg {
+    color: red;
+}
+
+.msg, .logout-msg {
+    color: green;
 }
 
 .login-box {

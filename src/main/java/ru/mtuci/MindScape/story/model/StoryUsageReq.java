@@ -12,11 +12,11 @@ public class StoryUsageReq {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "story_id")
-    private Story story;
+    //@ManyToOne
+    //@JoinColumn(name = "story_id")
+    //private Story story;
 
-    @ManyToOne
-    @JoinColumn(name = "researcher_id")
-    private Researcher researcher;
+    //@ManyToOne
+    //@JoinColumn(name = "researcher_id")
+    //private Researcher researcher;
 }

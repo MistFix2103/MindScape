@@ -1,11 +1,11 @@
-package ru.mtuci.MindScape.auth.service;
+package ru.mtuci.MindScape.auth_reg.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mtuci.MindScape.auth.dto.UserRegistrationDto;
+import ru.mtuci.MindScape.auth_reg.dto.UserRegistrationDto;
 import ru.mtuci.MindScape.user.model.ConfirmationCode;
 import ru.mtuci.MindScape.user.model.User;
 import ru.mtuci.MindScape.user.model.UserRole;
@@ -14,6 +14,8 @@ import ru.mtuci.MindScape.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.Random;
+
+import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 
 @Service
 @AllArgsConstructor
@@ -27,16 +29,18 @@ public class RegistrationService {
 
     public void preRegister(UserRegistrationDto registrationDto) {
         validateRegistration(registrationDto);
+        String email = registrationDto.getEmail();
 
+        confirmationCodeRepository.deleteByEmail(email);
         String confirmationCode = generateSixDigitCode();
         ConfirmationCode codeEntity = new ConfirmationCode();
-        codeEntity.setEmail(registrationDto.getEmail());
+        codeEntity.setEmail(email);
         codeEntity.setCode(confirmationCode);
         codeEntity.setExpirationDate(LocalDateTime.now().plusMinutes(10));
         codeEntity.setType(ConfirmationCode.Type.USER_REGISTRATION);
         confirmationCodeRepository.save(codeEntity);
 
-        emailService.sendCodeEmail(registrationDto.getEmail(), confirmationCode, 1);
+        emailService.sendCodeEmail(email, confirmationCode, 1);
     }
 
     @Transactional
@@ -50,43 +54,37 @@ public class RegistrationService {
         user.setRole(UserRole.USER);
 
         userRepository.save(user);
-        storedCodeEntity.setConfirmed(true);
         confirmationCodeRepository.delete(storedCodeEntity);
     }
 
     private void validateRegistration(UserRegistrationDto registrationDto) {
         if (userRepository.existsByEmail(registrationDto.getEmail())) {
-            throw new RuntimeException("EmailExists");
+            throw new EmailExistsException();
         }
 
         if (registrationDto.getPassword().length() < 6) {
-            throw new RuntimeException("PasswordTooShort");
+            throw new PasswordTooShortException();
         }
 
         if (!registrationDto.getPassword().equals(registrationDto.getConfirmPassword())) {
-            throw new RuntimeException("PasswordsDoNotMatch");
+            throw new PasswordsDoNotMatchException();
         }
     }
 
-    @Transactional
-    public void validateCode(String email, String code) throws RuntimeException {
+    public void validateCode(String email, String code) {
         ConfirmationCode storedCodeEntity = confirmationCodeRepository.findByEmail(email);
-
-        if (storedCodeEntity == null) {
-            throw new RuntimeException("InvalidCode");
-        }
 
         LocalDateTime now = LocalDateTime.now();
         if (storedCodeEntity.getExpirationDate().isBefore(now)) {
-            throw new RuntimeException("CodeExpired");
+            throw new CodeExpiredException();
         }
 
         if (!storedCodeEntity.getCode().equals(code)) {
-            throw new RuntimeException("InvalidCode");
+            throw new InvalidCodeException();
         }
     }
 
-    public void resendCode(String email) {
+    public void resendCode(String email, int role) {
         confirmationCodeRepository.deleteByEmail(email);
 
         String newGeneratedCode = generateSixDigitCode();
@@ -97,7 +95,7 @@ public class RegistrationService {
         newCode.setExpirationDate(LocalDateTime.now().plusMinutes(10));
         confirmationCodeRepository.save(newCode);
 
-        emailService.sendCodeEmail(email, newGeneratedCode, 1);
+        emailService.sendCodeEmail(email, newGeneratedCode, role);
     }
 
     public static String generateSixDigitCode() {

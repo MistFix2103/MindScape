@@ -33,8 +33,8 @@ public class User {
     @NotBlank
     private String password;
 
-    @OneToMany(mappedBy = "author")
-    private Set<Story> stories = new HashSet<>();
+    //@OneToMany(mappedBy = "author")
+    //private Set<Story> stories = new HashSet<>();
 
     @Enumerated(value = EnumType.STRING)
     @Column(name ="role")

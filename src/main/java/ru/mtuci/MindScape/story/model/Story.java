@@ -13,18 +13,18 @@ import java.util.Set;
 @Table(name = "story")
 public class Story {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @NotBlank
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    //@ManyToOne
+    //@JoinColumn(name = "author_id")
+    //private User author;
 
-    @OneToMany(mappedBy = "story")
-    private Set<Comment> comments;
+    //@OneToMany(mappedBy = "story")
+    //private Set<Comment> comments;
 
     private LocalDateTime time;
 }

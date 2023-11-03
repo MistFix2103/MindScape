@@ -1,3 +1,15 @@
+/**
+ * <p>Описание:</p>
+ * Конфигурационный класс для настройки JavaMailSender. Объявляет и конфигурирует бин для отправки электронных писем.
+ *
+ * <p>Методы:</p>
+ * <ul>
+ *     <li>
+ *         <b>mailSender</b> - Объявляет бин типа JavaMailSender и конфигурирует его для работы с smtp.mailtrap.io.
+ *     </li>
+ * </ul>
+ */
+
 package ru.mtuci.MindScape.config;
 
 import org.springframework.context.annotation.Bean;

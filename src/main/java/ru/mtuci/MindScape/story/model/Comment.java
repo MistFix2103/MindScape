@@ -6,6 +6,7 @@ import ru.mtuci.MindScape.user.model.User;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @NotBlank
     private String text;

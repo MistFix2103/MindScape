@@ -15,7 +15,7 @@
     </style>
      <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Общий контейнер со всеми элементами -->
@@ -32,7 +32,8 @@
                 <span th:text="${error}"></span>
             </div>
         </div>
-        <form th:action="@{/registration/expert}" method="post">
+
+        <form th:action="${userType == 'expert'} ? @{/registration/expert} : @{/registration/researcher}" method="post" enctype="multipart/form-data">
             <!-- Поля для ввода информации -->
             <div class="reg-box">
                 <input type="text" id="username" name="name" required placeholder="Ваше имя">
@@ -49,17 +50,22 @@
                 <div class="popup">
                     Инструкция: <p>
                     1. Подготовьте следующие документы в электронном виде: <br><br>
-                       • Лицензия на практику; <br>
-                       • Диплом об образовании; <br>
-                       • Сертификаты и квалификации (объединенные в один файл) <br><br>
+                    <span th:if="${userType == 'expert'}">
+                        • Лицензия на практику; <br>
+                        • Диплом об образовании; <br>
+                        • Сертификаты и квалификации (объединенные в один файл) <br><br>
+                    </span>
+                    <span th:if="${userType == 'researcher'}">
+                       • Ученая степень/диплом; <br>
+                       • Список публикаций; <br>
+                       • Профессиональные членства (в академических или профессиональных сообществах)<br><br>
+                    </span>
                     2. Выберите файлы (все сразу) и прикрепите их. <br><br>
                     3. После регистрации Ваши документы будут отправлены на проверку<br><br>
                     Допускаются файлы форматов: .pdf, .doc, .docx. Максимальное число файлов: 3.
                 </div>
-                <form action="/upload" method="post" enctype="multipart/form-data">
-                    <label for="file">Прикрепите Ваши документы:</label>
-                    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" multiple required>
-                </form>
+                <label for="file">Прикрепите Ваши документы:</label>
+                <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" multiple required>
             </div>
 
             <!-- Контейнер для кнопок -->

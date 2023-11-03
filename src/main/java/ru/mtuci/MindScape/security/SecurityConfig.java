@@ -1,4 +1,21 @@
-package ru.mtuci.MindScape.config;
+/**
+ * <p>Описание:</p>
+ * Конфигурационный класс для настройки безопасности веб-приложения на основе Spring Security.
+ *
+ * <p>Поля:</p>
+ * <ul>
+ *     <li>userDetailsService: Сервис для работы с данными пользователя.</li>
+ * </ul>
+ *
+ * <p>Методы:</p>
+ * <ul>
+ *     <li><b>filterChain</b> - Настраивает цепочку фильтров безопасности.</li>
+ *     <li><b>daoAuthenticationProvider</b> - Создает и настраивает менеджер аутентификации.</li>
+ *     <li><b>passwordEncoder</b> - Объявляет bean для кодирования паролей.</li>
+ * </ul>
+ */
+
+package ru.mtuci.MindScape.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;

@@ -1,3 +1,8 @@
+/**
+ * <p>Описание:</p>
+ * Контроллер, обрабатывающий страницы приложения, связанные с входом в сервис, регистрацией и восстановлением пароля.
+ */
+
 package ru.mtuci.MindScape.auth_reg.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.mtuci.MindScape.user.model.User;
-import ru.mtuci.MindScape.user.repository.UserRepository;
+import ru.mtuci.MindScape.auth_reg.service.UserService;
+import ru.mtuci.MindScape.user.model.BaseUser;
 
 import java.util.Optional;
 
@@ -35,13 +40,15 @@ public class PageController {
     }
 
     @GetMapping("/registration/expert")
-    public String showExpertRegistrationPage() {
+    public String showExpertRegistrationPage(Model model) {
+        model.addAttribute("userType", "expert");
         return "expert";
     }
 
     @GetMapping("/registration/researcher")
-    public String showResearcherRegistrationPage() {
-        return "researcher";
+    public String showResearcherRegistrationPage(Model model) {
+        model.addAttribute("userType", "researcher");
+        return "expert";
     }
 
     @GetMapping("/registration/verification")
@@ -57,13 +64,13 @@ public class PageController {
     }
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @GetMapping("/home")
     public String home(Authentication authentication, Model model) {
         String email = authentication.getName();
-        Optional<User> user = userRepository.findByEmail(email);
-        String username = user.get().getUsername();
-        model.addAttribute("username", username);
+        Optional<?> userOpt = userService.findUserByEmail(email);
+        BaseUser baseUser = (BaseUser) userOpt.get();
+        model.addAttribute("username", baseUser.getUsername());
         return "home";
     }
 }

@@ -7,6 +7,7 @@ import ru.mtuci.MindScape.user.model.User;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -14,7 +15,7 @@ import java.util.Set;
 public class Story {
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     @NotBlank
     private String text;

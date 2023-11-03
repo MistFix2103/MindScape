@@ -1,30 +1,11 @@
+/**
+ * <p>Описание:</p>
+ * Класс DTO для регистрации обычных пользователей.
+ * Наследует все поля от базового класса BaseRegistrationDto.
+ */
+
 package ru.mtuci.MindScape.auth_reg.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public class UserRegistrationDto extends BaseRegistrationDto {
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserRegistrationDto {
-        @NotEmpty
-        private String name;
-
-        @NotEmpty
-        @Email
-        private String email;
-
-        @NotEmpty
-        @Size(min = 6)
-        private String password;
-
-        @NotEmpty()
-        private String confirmPassword;
-
-        private String code;
 }

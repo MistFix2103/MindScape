@@ -1,3 +1,25 @@
+/**
+ * <p>Описание:</p>
+ * Сервисный класс для отправки электронных писем. Поддерживает отправку писем с различными шаблонами в зависимости от типа операции.
+ *
+ * <p>Поля:</p>
+ * <ul>
+ *     <li>userRegistrationSubject, userRegistrationText: Тема и текст письма для регистрации обычных пользователей.</li>
+ *     <li>expertRegistrationSubject, expertRegistrationText: Тема и текст письма для регистрации психологов и исследователей.</li>
+ *     <li>passRecoverSubject, passRecoverText: Тема и текст письма для восстановления пароля.</li>
+ * </ul>
+ *
+ * <p>Список методов:</p>
+ * <ul>
+ *     <li>
+ *         <b>sendCodeEmail</b> - Отправляет письмо с кодом подтверждения, в зависимости от роли пользователя (обычный пользователь, эксперт или восстановление пароля).
+ *     </li>
+ *     <li>
+ *         <b>sendMessage</b> - Отправляет письмо с заданными параметрами (адресат, тема, текст).
+ *     </li>
+ * </ul>
+ */
+
 package ru.mtuci.MindScape.auth_reg.service;
 
 import jakarta.transaction.Transactional;
@@ -6,7 +28,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import ru.mtuci.MindScape.user.repository.ConfirmationCodeRepository;
 
 @Service
 public class EmailService {
@@ -23,12 +44,6 @@ public class EmailService {
     @Value("${email-templates.expert.registration.text}")
     private String expertRegistrationText;
 
-    @Value("${email-templates.researcher.registration.subject}")
-    private String researcherRegistrationSubject;
-
-    @Value("${email-templates.researcher.registration.text}")
-    private String researcherRegistrationText;
-
     @Value("${email-templates.pass-recover.subject}")
     private String passRecoverSubject;
 
@@ -39,22 +54,18 @@ public class EmailService {
     private JavaMailSender emailSender;
 
     @Transactional
-    public void sendCodeEmail(String to, String code, int role) {
+    public void sendCodeEmail(String to, String code, String role) {
         String subject = "";
         String text = switch (role) {
-            case 1 -> {
+            case "user" -> {
                 subject = userRegistrationSubject;
                 yield String.format(userRegistrationText, code);
             }
-            case 2 -> {
+            case "expert" -> {
                 subject = expertRegistrationSubject;
                 yield String.format(expertRegistrationText, code);
             }
-            case 3 -> {
-                subject = researcherRegistrationSubject;
-                yield String.format(researcherRegistrationText, code);
-            }
-            case 4 -> {
+            case "recover" -> {
                 subject = passRecoverSubject;
                 yield String.format(passRecoverText, code);
             }

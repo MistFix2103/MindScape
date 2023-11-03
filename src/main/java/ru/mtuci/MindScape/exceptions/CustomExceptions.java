@@ -1,3 +1,8 @@
+/**
+ * <p>Описание:</p>
+ * Класс для обработки кастомных исключений.
+ */
+
 package ru.mtuci.MindScape.exceptions;
 
 import lombok.Getter;

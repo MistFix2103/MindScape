@@ -37,12 +37,14 @@
         <!-- Поле для ввода кода и кнопка подтверждения -->
         <form th:action="${operationType == 'registration' ? '/registration/verification' : '/forgot_password/verification'}" method="post">
             <div class="code-container">
-                <!-- CSRF token -->
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <input type="text" id="code" name="code" required placeholder="Код из письма">
                 <button class="enter_code" type="submit">Подтвердить</button>
+
+                <!-- CSRF token -->
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             </div>
         </form>
+
 
         <!-- Повторная отправка кода -->
         <a th:href="${operationType == 'registration' ? '/registration/resendCode' : '/forgot_password/resendCode'}">⟳ Отправить еще раз</a>

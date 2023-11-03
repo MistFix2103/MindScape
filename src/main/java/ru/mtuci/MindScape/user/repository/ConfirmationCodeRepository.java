@@ -1,3 +1,14 @@
+/**
+ * <p>Описание:</p>
+ * Репозиторий для работы с кодами подтверждения. Наследует интерфейс JpaRepository.
+ *
+ * <p>Методы:</p>
+ * <ul>
+ *     <li><b>findByEmail</b> - Поиск кода подтверждения по электронной почте.</li>
+ *     <li><b>deleteByEmail</b> - Удаление кода подтверждения по электронной почте.</li>
+ * </ul>
+ */
+
 package ru.mtuci.MindScape.user.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

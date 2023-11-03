@@ -1,9 +1,27 @@
-package ru.mtuci.MindScape.auth_reg.dto;
+/**
+ * <p>Описание:</p>
+ * Класс реализует интерфейс UserDetails, необходимый для интеграции с Spring Security.
+ *
+ * <p>Поля:</p>
+ * <ul>
+ *     <li>username: Имя пользователя.</li>
+ *     <li>password: Пароль.</li>
+ *     <li>authorities: Роли и права пользователя.</li>
+ *     <li>isActive: Статус активности аккаунта.</li>
+ * </ul>
+ *
+ * <p>Методы:</p>
+ * <ul>
+ *     <li><b>isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled</b> -
+ *     Методы для проверки статуса аккаунта.</li>
+ * </ul>
+ */
+
+package ru.mtuci.MindScape.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -34,17 +52,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
-    }
-
-    public static UserDetails fromUser(ru.mtuci.MindScape.user.model.User user) {
-        return new User(
-                user.getEmail(),
-                user.getPassword(),
-                true,
-                true,
-                true,
-                true,
-                user.getRole().grantedAuthority());
+        return true;
     }
 }

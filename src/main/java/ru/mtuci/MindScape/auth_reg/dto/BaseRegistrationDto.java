@@ -1,7 +1,8 @@
 /**
  * <p>Описание:</p>
- * Класс DTO для процедуры восстановления пароля.
- * Содержит поля для хранения адреса электронной почты, нового пароля, подтверждения нового пароля и кода подтверждения.
+ * Базовый Data Transfer Object (DTO) для операций, связанных с регистрацией.
+ * Этот класс предоставляет основные поля и аннотации валидации для объектов регистрации.
+ * Наследуется в специализированных DTO для различных типов пользователей (user, expert, researcher).
  */
 
 package ru.mtuci.MindScape.auth_reg.dto;
@@ -17,7 +18,10 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PassRecoverDto {
+public abstract class BaseRegistrationDto {
+    @NotEmpty
+    private String name;
+
     @NotEmpty
     @Email
     private String email;

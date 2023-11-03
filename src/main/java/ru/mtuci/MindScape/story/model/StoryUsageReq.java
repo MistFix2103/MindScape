@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import ru.mtuci.MindScape.user.model.Researcher;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @Table(name = "story_usage_req")
 public class StoryUsageReq {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     //@ManyToOne
     //@JoinColumn(name = "story_id")

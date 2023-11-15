@@ -1,0 +1,25 @@
+<!-- Шапка -->
+<div th:fragment="header" class="header">
+    <div class="logo-container" onclick="location.href='/home';" style="cursor: pointer;">
+        <img th:src="@{/images/logo.png}" alt="logo" id="logo">
+        <h1>MindScape</h1>
+    </div>
+    <!-- Кнопки -->
+    <div class="buttons">
+        <button class="custom-button" type="button" id="stories">Мои истории</button>
+        <button class="custom-button" type="button" id="requests">Запросы</button>
+    </div>
+    <!-- Имя пользователя + аватар + выпадающий список -->
+    <div class="dropdown">
+        <img th:src="@{/images/user_logo.png}" alt="user_logo" id="user_logo">
+        <span class="username" th:text="${username}"></span>
+
+        <div class="dropdown-content">
+            <a th:href="@{/home/profile}">Профиль</a>
+            <form action="/logout" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit" id="logout">Выйти</button>
+            </form>
+        </div>
+    </div>
+</div>

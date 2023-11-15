@@ -2,7 +2,6 @@ package ru.mtuci.MindScape.story.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import ru.mtuci.MindScape.user.model.Researcher;
 
 import java.util.UUID;
 

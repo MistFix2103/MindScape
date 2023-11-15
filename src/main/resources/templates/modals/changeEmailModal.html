@@ -1,0 +1,26 @@
+<!-- Модальное окно для изменения почты -->
+<div th:fragment="emailModal" class="emailModal" id="emailModal">
+    <div class="emailModal-content">
+        <div class="icon-container">
+            <img th:src="@{/images/mail_icon.png}" alt="Mail Icon" class="mail-icon">
+        </div>
+
+        <p id="emailModal-text">Введите новую почту:</p>
+
+        <!-- Блок для сообщения об ошибке -->
+        <div th:if="${emailError}" class="error-message" th:text="${emailError}" id="emailError"></div>
+
+        <form th:action="@{/home/profile/mail_change}" method="post" class="form-container">
+            <input type="email" id="userEmail" name="mail" required placeholder="Новая почта">
+
+            <!-- Блок с кнопками -->
+            <div class="buttonsModal">
+                <button type="submit" class="change-email">Подтвердить</button>
+                <button type="button" class="backModal-email" onclick="closeModal('emailModal')">Назад</button>
+            </div>
+
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

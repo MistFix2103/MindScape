@@ -4,9 +4,7 @@
  *
  * <p>Список методов:</p>
  * <ul>
- *     <li>
- *         <b>createPropertySource</b> - Загружает свойства из указанного ресурса и создает PropertySource.
- *     </li>
+ *     <li><b>createPropertySource</b> - Загружает свойства из указанного ресурса и создает PropertySource.</li>
  * </ul>
  */
 

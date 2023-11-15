@@ -1,0 +1,25 @@
+<!-- Модальное окно для изменения пароля -->
+<div th:fragment="passModal" class="passModal" id="passModal">
+    <div class="passModal-content">
+        <div class="icon-container">
+            <img th:src="@{/images/pass_icon.png}" alt="Pass Icon" class="pass-icon">
+        </div>
+        <p id="passModal-text">Введите новый пароль:</p>
+
+        <!-- Блок для сообщения об ошибке -->
+        <div th:if="${passError}" class="error-message" th:text="${passError}" id="passError"></div>
+
+        <form th:action="@{/home/profile/pass_change}" method="post" class="form-container">
+            <input type="password" id="password" name="password" required placeholder="Новый пароль">
+            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Повторите пароль">
+
+            <div class="buttonsModal">
+                <button type="submit" class="change-pass">Подтвердить</button>
+                <button type="button" class="backModal-pass" onclick="closeModal('passModal')">Назад</button>
+            </div>
+
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +7,6 @@
     <!-- Подключение css-файла и иконки -->
     <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" th:href="@{/css/user.css}">
-    <!-- Фон для страницы (иначе не работает) -->
-    <style>
-        body {
-            background-image: url(/images/user_reg_bg.png);
-        }
-    </style>
     <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;700&display=swap" rel="stylesheet">
@@ -26,12 +20,8 @@
             <h1 >Регистрация</h1>
         </div>
 
-        <!-- Поле для вывода ошибок -->
-        <div class="error-container">
-            <div th:if="${error}" class="error-message">
-                <span th:text="${error}"></span>
-            </div>
-        </div>
+        <!-- Блок для сообщения об ошибке -->
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
 
         <form th:action="@{/registration/user}" method="post">
             <!-- Поля для ввода информации -->

@@ -26,7 +26,8 @@ public class ConfirmationCode {
     public enum Type {
         USER_REGISTRATION,
         EXPERT_REGISTRATION,
-        PASSWORD_RESET
+        PASSWORD_RESET,
+        CHANGE_EMAIL
     }
 
     @Id

@@ -1,0 +1,150 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('../images/profile_bg.png');
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.msg {
+    color: green;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    position: relative;
+    top: 8vh;
+    left: 63vw;
+    width: 13.57vw;
+    max-width: 200px;
+    min-width: 200px;
+}
+
+.acc-status {
+    position: relative;
+    top: 10.9vh;
+    left: 54.6vw;
+    display: flex;
+    flex-direction: row;
+    width: 30.53vw;
+    gap: 10px;
+}
+
+.confirmed, .not-confirmed, .status  {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.confirmed {
+    color: green;
+}
+
+.not-confirmed {
+    color: red;
+}
+
+.acc-info, .login-options, .acc-actions {
+    width: 30.53vw;
+    height: 26.49vh;
+    top: 10.8vh;
+    left: 54.3vw;
+    position: relative;
+    box-shadow: 0 6px 10px rgba(100, 100, 100, 0.2);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    min-width: 450px;
+    max-width: 450px;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+.acc-actions {
+    height: 16.55vh;
+    min-height: 125px;
+    max-height: 125px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+h3 {
+    font-size: 18px;
+    padding: 15px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.name-container, .email-container, .pass-container, .auth-container, .act-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 97%; 
+    margin: 0 auto;
+    transition: background-color 0.3s ease-out;
+    cursor: pointer;
+    border-radius: 10px;
+}    
+
+.name-container:hover, .email-container:hover, .pass-container:hover, .auth-container:hover, .act-container:hover {
+    background-color: #cceeff;
+}
+
+.name-container, .pass-container, .act-container {
+    margin-top: -15px;
+}
+
+.email-container, .auth-container {
+    margin-top: 15px;
+}
+
+.user-icon, .mail-icon, .pass-icon, .auth-icon {
+    width: 32px;
+    height: 29px; 
+    margin-right: 10px; 
+    margin-left: 13px;
+}
+
+.delete-icon {
+    width: 42px;
+    height: 40px; 
+}
+
+.name-text, .mail-text, .pass-text, .auth-text, .delete-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.name_label, .name_value, .mail_label, .mail_value, .pass_label, .pass_value, .auth_label, .auth_value, .delete_label, .delete_value {
+    margin: 2px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.name_value, .mail_value, .pass_value, .auth_value, .delete_value {
+    font-size: 14px;
+    color: gray;
+}
+
+.arrow {
+    margin-left: auto;
+    margin-right: 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: gray;
+}
+
+.highlighted {
+  background-color: #cceeff;
+  transition: background-color 0.3s ease-out;
+}

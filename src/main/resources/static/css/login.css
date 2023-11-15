@@ -8,6 +8,7 @@ body, html {
 }
 
 body {
+    background-image: url('../images/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -143,7 +144,7 @@ body {
 
 #register {
    background: linear-gradient(135deg, #AEDFF7, #6A9ACD);
-    color: white;
+   color: white;
 }
 
 #login:hover {

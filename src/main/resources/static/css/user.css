@@ -8,6 +8,7 @@ body, html {
 }
 
 body {
+    background-image: url('../images/user_reg_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,21 +23,19 @@ body {
 
 .container {
     position: absolute;
-    width: 28vw;
-    height: 53vh;
     border-radius: 20px;
     background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 10px 17px rgba(0, 0, 0, 0.7);
-}
+    padding-bottom: 20px;
 
-.container {
     min-width: 413px;
     max-width: 413px;
-    max-height: 400px;
-    min-height: 400px;
+
+    min-height: 355px;
+    max-height: 380px;
 }
 
 .logo-container {
@@ -59,16 +58,11 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.error-container {
-    height: 20px;
-}
-
 .error-message {
     color: red;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     font-size: 14px;
-    margin-top: 7px;
 }
 
 .reg-box {
@@ -99,7 +93,7 @@ body {
 }
 
 .button-container {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 #back {
@@ -130,5 +124,5 @@ body {
 }
 
 #back:hover {
-    transform: scale(1.05); !important
+    transform: scale(1.05);
 }

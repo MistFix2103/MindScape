@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключение css-файлов и иконки -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/deleteAccountModal.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/changeNameModal.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/changeEmailModal.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/changePassModal.css}">
+    <link href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" rel="stylesheet">
+    <link rel="icon" href="/images/favicon.ico">
+    <!-- Шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap" rel="stylesheet">
+    <script src="/js/profile.js"></script>
+</head>
+<body>
+    <!-- Включаем шапку -->
+    <div th:replace="~{/header :: header}"></div>
+
+    <!-- У психологов и исследователей есть строка, отображающая, подтвердил ли модератор их документы -->
+    <div th:if="${showStatus}" class="acc-status">
+        <span class="status">Статус аккаунта:</span>
+        <span th:class="${isVerified} ? 'confirmed' : 'not-confirmed'"
+                    th:text="${isVerified} ? 'Подтвержден' : 'Не подтвержден'"></span>
+    </div>
+
+    <!-- Блок с информацией об аккаунте. В нем можно поменять имя и почту-->
+    <div class="acc-info" th:object="${user}">
+        <h3>Информация об аккаунте:</h3>
+        <div class="name-container" id="name-container" onclick="openModal('nameModal')">
+            <img th:src="@{/images/user_icon.png}" alt="User Icon" class="user-icon">
+            <div class="name-text">
+                <span class="name_label">Имя:</span>
+                <span class="name_value" th:text="*{username}"></span>
+            </div>
+            <span class="arrow">〉</span>
+        </div>
+        <div class="email-container" id="email-container" onclick="openModal('emailModal')">
+            <img th:src="@{/images/mail_icon.png}" alt="Mail Icon" class="mail-icon">
+            <div class="mail-text">
+                <span class="mail_label">Почта:</span>
+                <span class="mail_value" th:text="*{email}"></span>
+            </div>
+            <span class="arrow">〉</span>
+        </div>
+    </div>
+
+    <!-- Блок с информацией о параметрах входа. В нем можно поменять пароль и включить двухфакторную аутентификацию -->
+    <div class="login-options" th:object="${user}">
+        <h3>Параметры входа:</h3>
+        <div class="pass-container" id="pass-container" onclick="openModal('passModal')">
+            <img th:src="@{/images/pass_icon.png}" alt="Pass Icon" class="pass-icon">
+            <div class="pass-text">
+                <span class="pass_label">Пароль:</span>
+                <span class="pass_value">Нажмите, чтобы изменить пароль</span>
+            </div>
+            <span class="arrow">〉</span>
+        </div>
+        <div class="auth-container">
+            <img th:src="@{/images/2step_icon.png}" alt="2step Icon" class="auth-icon">
+            <div class="auth-text">
+                <span class="auth_label">Двухфакторная аутентификация:</span>
+                <span class="auth_value" th:text="*{two_step} ? 'Подключено' : 'Нажмите, чтобы подключить'"></span>
+            </div>
+            <span class="arrow">〉</span>
+        </div>
+    </div>
+
+    <!-- Блок "Действия с аккаунтом". В нем можно удалить свой аккаунт -->
+    <div class="acc-actions">
+        <h3>Действия с аккаунтом:</h3>
+        <div class="act-container" onclick="openModal('deleteModal')">
+            <img th:src="@{/images/delete_icon.png}" alt="Delete Icon" class="delete-icon">
+            <div class="delete-text">
+                <span class="delete_label">Удалить аккаунт</span>
+                <span class="delete_value">Вы можете полностью удалить свой аккаунт</span>
+            </div>
+            <span class="arrow">〉</span>
+        </div>
+    </div>
+
+    <!-- Добавляем модальные окна -->
+    <div th:replace="~{modals/deleteAccountModal :: deleteModal}"></div>
+    <div th:replace="~{modals/changeNameModal :: nameModal}"></div>
+    <div th:replace="~{modals/changeEmailModal :: emailModal}"></div>
+    <div th:replace="~{modals/changePassModal :: passModal}"></div>
+
+    <!-- Здесь будет имя контейнера, который надо подсветить -->
+    <input type="hidden" id="highlightContainer" th:value="${highlightContainerName}" />
+</body>
+</html>

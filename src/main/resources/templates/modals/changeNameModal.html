@@ -1,0 +1,18 @@
+<!-- Модальное окно для изменения имени -->
+<div th:fragment="nameModal" class="nameModal" id="nameModal">
+    <div class="nameModal-content">
+        <div class="icon-container">
+            <img th:src="@{/images/user_icon.png}" alt="User Icon" class="user-icon">
+        </div>
+        <p id="nameModal-text">Введите Ваше имя:</p>
+        <form th:action="@{/home/profile/change-name}" method="post" class="form-container">
+            <input type="text" id="username" name="name" placeholder="Ваше имя">
+            <div class="buttonsModal">
+                <button type="submit" class="change-name">Сохранить</button>
+                <button type="button" class="backModal-name" onclick="closeModal('nameModal')">Назад</button>
+            </div>
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

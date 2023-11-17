@@ -138,14 +138,45 @@ body {
     visibility: visible;
 }
 
-label, input, .popup {
+label, input, .popup, #file-name {
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
     font-size: 13px;
 }
 
+#file {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.file-upload-button {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Comfortaa', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+.file-upload-button:hover {
+    background-color: #e6e6e6;
+    color: #555;
+}
+
 .button-container {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 #back {
@@ -166,7 +197,6 @@ label, input, .popup {
 }
 
 #registration {
-    margin-right: 15px;
     transition: background 0.7s;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     background: linear-gradient(135deg, #b9a1e2, #a0bef5);

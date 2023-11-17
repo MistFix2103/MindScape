@@ -43,9 +43,15 @@ public class UserService {
         codeEntity.setCode(confirmationCode);
         codeEntity.setExpirationDate(LocalDateTime.now().plusMinutes(10));
 
-        String code_type = type.equals("mail_change") ? "CHANGE_EMAIL" :
-                                          type.equals("recover") ? "PASSWORD_RESET" :
-                                          type.equals("user") ? "USER_REGISTRATION" : "EXPERT_REGISTRATION";
+        String code_type = switch (type) {
+            case "mail_change" -> "CHANGE_EMAIL";
+            case "pass_change" -> "CHANGE_PASSWORD";
+            case "recover" -> "PASSWORD_RESET";
+            case "user" -> "USER_REGISTRATION";
+            case "expert" -> "EXPERT_REGISTRATION";
+            case "two-step" -> "TWO_FACTOR";
+            default -> throw new IllegalStateException("Unexpected value: " + type);
+        };
         codeEntity.setType(ConfirmationCode.Type.valueOf(code_type));
         confirmationCodeRepository.save(codeEntity);
         emailService.sendCodeEmail(mail, confirmationCode, type);
@@ -59,14 +65,13 @@ public class UserService {
 
     public void validateCode(String email, String code) {
         ConfirmationCode storedCodeEntity = confirmationCodeRepository.findByEmail(email);
+        if (!storedCodeEntity.getCode().equals(code)) {
+            throw new InvalidCodeException();
+        }
 
         LocalDateTime now = LocalDateTime.now();
         if (storedCodeEntity.getExpirationDate().isBefore(now)) {
             throw new CodeExpiredException();
-        }
-
-        if (!storedCodeEntity.getCode().equals(code)) {
-            throw new InvalidCodeException();
         }
         confirmationCodeRepository.deleteByEmail(email);
     }

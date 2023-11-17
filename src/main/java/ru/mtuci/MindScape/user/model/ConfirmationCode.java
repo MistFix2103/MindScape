@@ -27,7 +27,9 @@ public class ConfirmationCode {
         USER_REGISTRATION,
         EXPERT_REGISTRATION,
         PASSWORD_RESET,
-        CHANGE_EMAIL
+        CHANGE_EMAIL,
+        CHANGE_PASSWORD,
+        TWO_FACTOR;
     }
 
     @Id

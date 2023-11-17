@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.mtuci.MindScape.user.model.User;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
+import java.util.Base64;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/home")
 @AllArgsConstructor
@@ -22,29 +25,27 @@ public class HomePageController {
     private final UserRepository userRepository;
 
     @GetMapping
-    public String home(Authentication authentication, Model model, HttpSession session) {
+    public String home(Authentication authentication, Model model) {
         User user = userRepository.findByEmail(authentication.getName()).get();
         String username = user.getUsername();
-        if (session.getAttribute("username") == null) {
-            session.setAttribute("username", username);
-        }
-        model.addAttribute("user_id", user.getId());
+        Optional.ofNullable(user.getImage())
+                .map(Base64.getEncoder()::encodeToString)
+                .ifPresent(img -> model.addAttribute("userImage", "data:image/png;base64," + img));
         model.addAttribute("username", username);
         return "home";
     }
-    @GetMapping("/profile")
-    public String showProfilePage(Model model, Authentication authentication, HttpSession session) {
-        User user = userRepository.findByEmail(authentication.getName()).get();
-        String username = (String) session.getAttribute("username");
-        String role = String.valueOf(user.getRole());
-        model.addAttribute("username", username);
-        model.addAttribute("user", user);
 
-        boolean flag = !(role.equals("USER"));
-        model.addAttribute("showStatus", flag);
-        if (flag) {
-            model.addAttribute("isVerified", user.isVerified());
-        }
+    @GetMapping("/profile")
+    public String showProfilePage(Model model, Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName()).get();
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("user", user);
+        model.addAttribute("showStatus", !String.valueOf(user.getRole()).equals("USER"));
+
+        Optional.ofNullable(user.getImage())
+                .map(Base64.getEncoder()::encodeToString)
+                .ifPresent(img -> model.addAttribute("userImage", "data:image/png;base64," + img));
+
         return "profile";
     }
 

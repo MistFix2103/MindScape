@@ -36,7 +36,6 @@ import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 @AllArgsConstructor
 @Getter
 public class RegistrationService {
-
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
@@ -45,6 +44,14 @@ public class RegistrationService {
     public void preRegister(HttpSession session) {
         UserRegistrationDto regDto = (UserRegistrationDto) session.getAttribute("DTO");
         String email = regDto.getEmail();
+        String username = regDto.getName();
+        if (username.length() > 24) {
+            throw new NameIsTooLongException();
+        }
+
+        if (!username.matches("^[\\p{L}\\s]+$")) {
+            throw new IncorrectNameException();
+        }
         if (userRepository.findByEmail(email).isPresent()) {
             throw new EmailExistsException();
         }

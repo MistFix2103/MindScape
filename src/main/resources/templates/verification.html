@@ -27,7 +27,7 @@
                                operationType == 'recovery' ? 'На указанную Вами почту был выслан код, введите его для подтверждения изменения пароля. Код действителен 10 минут.' :
                                operationType == 'password_change' ? 'На указанную Вами почту был выслан код, введите его для подтверждения изменения пароля. Код действителен 10 минут.' :
                                operationType == 'mail_change' ? 'На Вашу новую почту был выслан код, введите его для подтверждения изменения текущей почты. Код действителен 10 минут.' :
-                               'На Вашу новую почту был выслан код, введите его для подтверждения входа в аккаунт. Код действителен 10 минут.'}"></p>
+                               'На Вашу почту был выслан код, введите его для подтверждения входа в аккаунт. Код действителен 10 минут.'}"></p>
 
         <!-- Поле для ошибок -->
         <div class="error-msg">
@@ -40,7 +40,7 @@
                                         operationType == 'recovery' ? '/forgot_password/verification' :
                                         operationType == 'mail_change' ? '/home/profile/verification/mail_change' :
                                         operationType == 'password_change' ? '/home/profile/verification/password_change' :
-                                        'login/two_factor'}" method="post">
+                                        '/login/2fa/verify'}" method="post">
             <div class="code-container">
                 <input type="text" id="code" name="code" required placeholder="Код из письма">
                 <button class="enter_code" type="submit">Подтвердить</button>

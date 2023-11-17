@@ -1,10 +1,14 @@
 <!-- Модальное окно для изменения имени -->
 <div th:fragment="nameModal" class="nameModal" id="nameModal">
     <div class="nameModal-content">
-        <div class="icon-container">
+        <div class="iconName-container">
             <img th:src="@{/images/user_icon.png}" alt="User Icon" class="user-icon">
         </div>
         <p id="nameModal-text">Введите Ваше имя:</p>
+
+        <!-- Блок для сообщения об ошибке -->
+        <div th:if="${nameError}" class="error-message" th:text="${nameError}" id="nameError"></div>
+
         <form th:action="@{/home/profile/change-name}" method="post" class="form-container">
             <input type="text" id="username" name="name" placeholder="Ваше имя">
             <div class="buttonsModal">

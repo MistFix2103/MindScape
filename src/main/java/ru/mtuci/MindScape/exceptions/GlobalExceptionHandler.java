@@ -28,14 +28,22 @@ public class GlobalExceptionHandler {
             EmailExistsException.class,
             PasswordTooShortException.class,
             PasswordsDoNotMatchException.class,
-            NewPassCanNotMatchOldPassException.class
+            NewPassCanNotMatchOldPassException.class,
+            IncorrectNameException.class,
+            NameIsTooLongException.class
     })
-    public String handleEmailPassExceptions(Exception e, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public String handleCredentialsExceptions(Exception e, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         String referer = request.getHeader("Referer");
         log.error("Ошибка проверки данных: " + e.getMessage(), e);
         String attributeKey = "error";
         if (referer.contains("/home/profile")) {
-            attributeKey = e instanceof EmailExistsException ? "emailError" : "passError";
+            if (e instanceof IncorrectNameException || e instanceof NameIsTooLongException) {
+                attributeKey = "nameError";
+            } else if (e instanceof EmailExistsException) {
+                attributeKey = "emailError";
+            } else {
+                attributeKey = "passError";
+            }
         }
         redirectAttributes.addFlashAttribute(attributeKey, e.getMessage());
         return "redirect:" + referer;
@@ -46,7 +54,7 @@ public class GlobalExceptionHandler {
         log.error("Ошибка ввода кода: " + e.getMessage(), e);
         String operationType = (String) request.getAttribute("operationType");
         model.addAttribute("error", e.getMessage());
-        model.addAttribute("operationType", operationType != null ? operationType : "default");
+        model.addAttribute("operationType", operationType);
         return "verification";
     }
 }

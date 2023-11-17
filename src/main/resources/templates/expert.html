@@ -55,7 +55,11 @@
                     Допускаются файлы форматов: .pdf, .doc, .docx. Максимальное число файлов: 3.
                 </div>
                 <label for="file">Прикрепите Ваши документы:</label>
-                <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" multiple required>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" multiple required>
+                    <button type="button" onclick="document.getElementById('file').click()" class="file-upload-button">Обзор...</button>
+                    <span id="file-name">Файл не выбран.</span>
+                </div>
             </div>
 
             <!-- Контейнер для кнопок -->

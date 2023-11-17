@@ -17,6 +17,7 @@
 
 package ru.mtuci.MindScape.security;
 
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ru.mtuci.MindScape.user.model.User;
+import ru.mtuci.MindScape.user.repository.UserRepository;
+
+import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -40,6 +46,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+    private final UserRepository userRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -55,7 +62,22 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/home", true))
+                        .defaultSuccessUrl("/home", true)
+                        .successHandler(((request, response, authentication) -> {
+                            Optional<User> user = userRepository.findByEmail(authentication.getName());
+                            if (user.get().isTwo_step()) {
+                                response.sendRedirect("/login/2fa");
+                            } else {
+                                CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+                                if (csrfToken != null) {
+                                    Cookie cookie = new Cookie("XSRF-TOKEN", csrfToken.getToken());
+                                    cookie.setPath("/");
+                                    response.addCookie(cookie);
+                                }
+                                response.sendRedirect("/home");
+                            }
+                        }))
+                       )
                 .logout(form -> form
                         .logoutSuccessUrl("/login?logout=true")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")).permitAll()

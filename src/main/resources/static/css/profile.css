@@ -18,22 +18,118 @@ body {
     to   { opacity: 1; }
 }
 
+.profile-image-block {
+    position: absolute;
+    top: 20vh;
+    left: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    box-shadow: 0 6px 10px rgba(100, 100, 100, 0.2);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    min-width: 350px;
+    max-width: 350px;
+
+    min-height: 510px;
+    max-height: 510px;
+}
+
+.profile-image {
+    width: 175px;
+    height: 175px;
+    margin-top: -5px;
+    border-radius: 10px;
+}
+
+.thumbnail-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-top: -5px;
+}
+
+hr {
+    width: 330px;
+    height: 1px;
+    opacity: 0.5;
+}
+
+.info-text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    padding: 10px 20px;
+    margin-top: -13px;
+    opacity: 0.8;
+}
+
+#fileInput {
+    display: none;
+}
+
+.photo-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.upload-button, .delete-button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.7s;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.upload-button {
+    background: linear-gradient(135deg, #b9a1e2, #a0bef5);
+    color: white;
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.3);
+}
+
+.delete-button {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.upload-button:hover {
+    background: linear-gradient(135deg, #a68fd0, #8daee5);
+}
+
+.delete-button:hover {
+    background-color: #e6e6e6;
+    color: #555;
+}
+
+.account-settings {
+    position: absolute;
+    top: 15vh;
+    left: 55vw;
+    gap: 20px;
+    min-width: 490px;
+    max-width: 490px;
+
+    min-height: 638px;
+    max-height: 638px;
+}
+
 .msg {
     color: green;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
-    position: relative;
-    top: 8vh;
-    left: 63vw;
-    width: 13.57vw;
+
     max-width: 200px;
     min-width: 200px;
 }
 
 .acc-status {
-    position: relative;
-    top: 10.9vh;
-    left: 54.6vw;
     display: flex;
     flex-direction: row;
     width: 30.53vw;
@@ -54,22 +150,18 @@ body {
 }
 
 .acc-info, .login-options, .acc-actions {
-    width: 30.53vw;
-    height: 26.49vh;
-    top: 10.8vh;
-    left: 54.3vw;
-    position: relative;
     box-shadow: 0 6px 10px rgba(100, 100, 100, 0.2);
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.8);
+
     min-width: 450px;
     max-width: 450px;
+
     min-height: 200px;
     max-height: 200px;
 }
 
 .acc-actions {
-    height: 16.55vh;
     min-height: 125px;
     max-height: 125px;
     background-color: rgba(255, 255, 255, 0.9);
@@ -82,7 +174,7 @@ h3 {
     font-weight: 500;
 }
 
-.name-container, .email-container, .pass-container, .auth-container, .act-container {
+.name-container, .email-container, .pass-container, .twoFA-container, .act-container {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -93,7 +185,7 @@ h3 {
     border-radius: 10px;
 }    
 
-.name-container:hover, .email-container:hover, .pass-container:hover, .auth-container:hover, .act-container:hover {
+.name-container:hover, .email-container:hover, .pass-container:hover, .twoFA-container:hover, .act-container:hover {
     background-color: #cceeff;
 }
 
@@ -101,7 +193,7 @@ h3 {
     margin-top: -15px;
 }
 
-.email-container, .auth-container {
+.email-container, .twoFA-container {
     margin-top: 15px;
 }
 

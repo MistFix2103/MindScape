@@ -11,6 +11,9 @@
  *     <li><b>changeMail</b> - Вызывает сервисный метод для изменения почты.</li>
  *     <li><b>preChangePass</b> - Вызывает сервисный метод для проверки пароля.</li>
  *     <li><b>changePass</b> - Вызывает сервисный метод для проверки пароля.</li>
+ *     <li><b>changeImage</b> - Вызывает сервисный метод для смены изображения профиля.</li>
+ *     <li><b>deleteImage</b> - Вызывает сервисный метод для удаления изображения профиля.</li>
+ *     <li><b>manage2FA</b> - Вызывает сервисный метод для управления двухфакторной аутентификацией.</li>
  *     <li><b>resendCode</b> - Метод для повторной отправки кода.</li>
  * </ul>
  */
@@ -25,10 +28,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mtuci.MindScape.auth.service.UserService;
 import ru.mtuci.MindScape.home.service.ProfileEditService;
 import ru.mtuci.MindScape.user.repository.UserRepository;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/home/profile")
@@ -37,6 +43,7 @@ public class ProfileEditController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final ProfileEditService profileEditService;
+
     @PostMapping("/delete-account")
     public String deleteAccount(Authentication authentication, RedirectAttributes redirectAttributes) {
         userRepository.deleteByEmail(authentication.getName());
@@ -48,19 +55,21 @@ public class ProfileEditController {
     public String changeName(
             @RequestParam("name") String newName,
             Authentication authentication,
-            RedirectAttributes redirectAttributes,
-            HttpServletRequest request,
-            HttpSession session) {
-        profileEditService.changeName(newName, authentication.getName(), session);
+            RedirectAttributes redirectAttributes) {
+        profileEditService.validateName(newName);
+        profileEditService.changeName(newName, authentication.getName());
         redirectAttributes.addFlashAttribute("highlightContainerName", "name-container");
-        return "redirect:" + request.getHeader("Referer");
+        return "redirect:/home/profile";
     }
 
     @PostMapping("/mail_change")
-    private String preChangeMail(@RequestParam("mail") String newMail, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String preChangeMail(
+            @RequestParam("mail") String newMail,
+            RedirectAttributes redirectAttributes,
+            HttpSession session) {
         profileEditService.preChangeMail(newMail);
-        redirectAttributes.addFlashAttribute("operationType", "mail_change");
         session.setAttribute("newMail", newMail);
+        redirectAttributes.addFlashAttribute("operationType", "mail_change");
         return "redirect:/home/profile/verification";
     }
 
@@ -108,6 +117,27 @@ public class ProfileEditController {
         profileEditService.changePass(email, (String) session.getAttribute("newPass"));
         session.removeAttribute("newPass");
         redirectAttributes.addFlashAttribute("highlightContainerName", "pass-container");
+        return "redirect:/home/profile";
+    }
+
+    @PostMapping("/2fa")
+    public String manage2FA(Authentication authentication, RedirectAttributes redirectAttributes) {
+        profileEditService.manage2FA(authentication.getName());
+        redirectAttributes.addFlashAttribute("highlightContainerName", "twoFA-container");
+        return "redirect:/home/profile";
+    }
+
+    @PostMapping("/photo_change")
+    public String changeImage(
+            @RequestParam("image") MultipartFile file,
+            Authentication authentication) throws IOException {
+        profileEditService.changeImage(file, authentication.getName());
+        return "redirect:/home/profile";
+    }
+
+    @PostMapping("/photo_delete")
+    public String deleteImage(Authentication authentication) {
+        profileEditService.deleteImage(authentication.getName());
         return "redirect:/home/profile";
     }
 

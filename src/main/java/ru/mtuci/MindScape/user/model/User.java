@@ -39,7 +39,7 @@ public class User {
     @Column(name ="role")
     private UserRole role;
 
-    @Column(name = "2step", nullable = false, columnDefinition = "TINYINT(1) default '0'")
+    @Column(name = "2FA", nullable = false, columnDefinition = "TINYINT(1) default '0'")
     private boolean two_step;
 
     @Lob
@@ -48,4 +48,8 @@ public class User {
 
     @Column(columnDefinition = "TINYINT(1)")
     private boolean verified;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB ")
+    private byte[] image;
 }

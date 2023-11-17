@@ -43,5 +43,15 @@ public class CustomExceptions {
     public static class NewPassCanNotMatchOldPassException extends RuntimeException {
         private final String message = "Новый пароль не может совпадать со старым!";
     }
+
+    @Getter
+    public static class NameIsTooLongException extends RuntimeException {
+        private final String message = "Имя слишком длинное (>24 символов)!";
+    }
+
+    @Getter
+    public static class IncorrectNameException extends RuntimeException {
+        private final String message = "Имя может содержать только буквы!";
+    }
 }
 

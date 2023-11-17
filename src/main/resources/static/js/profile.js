@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 700);
     }
 
-    var emailError = document.getElementById('emailError');
-    if (emailError && emailError.textContent.trim() !== '') {
-        emailError.classList.add('active');
-        openModal('emailModal');
+    function processError(elementId, modalId) {
+        var errorElement = document.getElementById(elementId);
+        if (errorElement && errorElement.textContent.trim() !== '') {
+            errorElement.classList.add('active');
+            openModal(modalId);
+        }
     }
 
-    var passError = document.getElementById('passError');
-    if (passError && passError.textContent.trim() !== '') {
-        passError.classList.add('active');
-        openModal('passModal');
-    }
+    processError('emailError', 'emailModal');
+    processError('passError', 'passModal');
+    processError('nameError', 'nameModal');
 });
 
 document.addEventListener('keydown', function(event) {
@@ -60,7 +60,7 @@ function highlightContainer(containerId) {
         container.classList.add('highlighted');
         setTimeout(function() {
             container.classList.remove('highlighted');
-        }, 500);
+        }, 800);
     } else {
         console.error('Container not found: ' + containerId);
     }
@@ -70,3 +70,25 @@ function getQueryParam(param) {
     var searchParams = new URLSearchParams(window.location.search);
     return searchParams.get(param);
 }
+
+function loadFile(event) {
+    var file = event.target.files[0];
+    if (file) {
+        if (file.type === "image/png") {
+            if (file.size <= 16777216) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var output = document.getElementById('profileImage');
+                    output.src = e.target.result;
+                    document.getElementById('photo').submit();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Файл слишком большой. Размер файла должен быть не более 16 МБ.');
+            }
+        } else {
+            alert('Пожалуйста, выберите изображение в формате PNG.');
+        }
+    }
+}
+

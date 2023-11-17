@@ -51,9 +51,9 @@
 
 .icon-container {
     position: absolute;
-    top: 44%;
+    top: 46%;
     left: 2px;
-    transform: translateY(-44%);
+    transform: translateY(-46%);
 }
 
 .mail-icon {

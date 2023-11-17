@@ -1,0 +1,17 @@
+<!-- Модальное окно для подключения двухфакторной аутентификации -->
+<div th:fragment="twoFAModal" class="twoFAModal" id="twoFAModal" th:object="${user}">
+    <div class="twoFAModal-content">
+        <div class="icon2FA-container">
+            <img th:src="@{/images/2step_icon.png}" alt="twoFA Icon" class="twoFA-icon">
+        </div>
+        <p id="twoFAModal-text">После подключения двухфакторной аутентификации при каждом входе в аккаунт Вам на почту будет приходить письмо с кодом подтверждения. Это позволит обезопасить Ваш аккаунт.</p>
+        <form th:action="@{/home/profile/2fa}" method="post" class="form-container">
+            <div class="buttons2FAModal">
+                <button type="submit" class="change-2fa" th:text="*{two_step} ? 'Отключить' : 'Подключить'"></button>
+                <button type="button" class="backModal-2fa" onclick="closeModal('twoFAModal')">Назад</button>
+            </div>
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

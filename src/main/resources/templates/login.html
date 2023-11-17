@@ -35,6 +35,8 @@
             <div class="login-box">
                 <input type="email" id="userEmail" name="email" required placeholder="E-mail">
                 <input type="password" id="userPassword" name="password" required placeholder="Пароль">
+
+                <!-- CSRF token -->
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             </div>
 

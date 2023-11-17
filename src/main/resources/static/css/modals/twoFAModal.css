@@ -1,4 +1,4 @@
-.nameModal {
+.twoFAModal {
     display: none;
     position: fixed;
     z-index: 1001;
@@ -17,7 +17,7 @@
     }
 }
 
-.nameModal-content {
+.twoFAModal-content {
     position: relative;
     background-color: #fefefe;
     margin: 20% auto;
@@ -33,8 +33,8 @@
     min-width: 442px;
     max-width: 442px;
 
-    min-height: 156px;
-    max-height: 174px;
+    min-height: 172px;
+    max-height: 172px;
 }
 
 @keyframes smoothStretch {
@@ -48,14 +48,14 @@
     }
 }
 
-.iconName-container {
+.icon2FA-container {
     position: absolute;
-    top: 44%;
-    left: 2px;
-    transform: translateY(-44%);
+    top: 45%;
+    left: 15px;
+    transform: translateY(-45%);
 }
 
-.user-icon {
+.twoFA-icon {
     width: 25.6px;
     height: 23.2px;
 }
@@ -67,7 +67,7 @@
      width: 100%;
  }
 
-#nameModal-text {
+#twoFAModal-text {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -75,29 +75,13 @@
     margin-left: 50px;
 }
 
-.error-message {
-    color: red;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    display: none;
-    margin-top: -5px;
-    margin-bottom: 5px;
-    align-self: flex-start;
-    margin-left: 50px;
-}
-
-.nameModal .error-message.active {
-    display: block;
-}
-
-.buttonsModal {
+.buttons2FAModal {
     display: flex;
     gap: 1rem;
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
-.change-name, .backModal-name {
+.change-2fa, .backModal-2fa {
     padding: 10px 25px;
     border: none;
     border-radius: 25px;
@@ -108,23 +92,11 @@
     font-family: 'Comfortaa', sans-serif;
 }
 
-.change-name {
+.change-2fa {
     background: linear-gradient(135deg, #b9a1e2, #a0bef5);
     color: white;
 }
 
-.change-name:hover {
+.change-2fa:hover {
     background: linear-gradient(135deg, #a68fd0, #8daee5);
-}
-
-#username {
-    font-size: 16px;
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 200;
-    width: calc(100% - 70px);
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    margin-left: 40px;
 }

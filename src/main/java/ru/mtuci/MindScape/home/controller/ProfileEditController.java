@@ -23,11 +23,13 @@ package ru.mtuci.MindScape.home.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.mtuci.MindScape.auth.service.UserService;
@@ -35,6 +37,8 @@ import ru.mtuci.MindScape.home.service.ProfileEditService;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/home/profile")
@@ -52,25 +56,23 @@ public class ProfileEditController {
     }
 
     @PostMapping("/change-name")
-    public String changeName(
+    @ResponseBody
+    public ResponseEntity<?> changeName(
             @RequestParam("name") String newName,
-            Authentication authentication,
-            RedirectAttributes redirectAttributes) {
+            Authentication authentication) {
         profileEditService.validateName(newName);
         profileEditService.changeName(newName, authentication.getName());
-        redirectAttributes.addFlashAttribute("highlightContainerName", "name-container");
-        return "redirect:/home/profile";
+        return ResponseEntity.ok().body(Map.of("highlightContainerName", "name-container"));
     }
 
     @PostMapping("/mail_change")
-    public String preChangeMail(
+    @ResponseBody
+    public ResponseEntity<?> preChangeMail(
             @RequestParam("mail") String newMail,
-            RedirectAttributes redirectAttributes,
             HttpSession session) {
         profileEditService.preChangeMail(newMail);
         session.setAttribute("newMail", newMail);
-        redirectAttributes.addFlashAttribute("operationType", "mail_change");
-        return "redirect:/home/profile/verification";
+        return ResponseEntity.ok().body(Map.of("operationType", "mail_change"));
     }
 
     @PostMapping("/verification/mail_change")
@@ -78,9 +80,7 @@ public class ProfileEditController {
             @RequestParam String code,
             Authentication authentication,
             RedirectAttributes redirectAttributes,
-            HttpServletRequest request,
             HttpSession session) {
-        request.setAttribute("operationType", "mail_change");
         String oldEmail = authentication.getName();
         String newEmail = (String) session.getAttribute("newMail");
         userService.validateCode(newEmail, code);
@@ -91,17 +91,15 @@ public class ProfileEditController {
     }
 
     @PostMapping("/pass_change")
-    public String preChangePass(
+    @ResponseBody
+    public ResponseEntity<?> preChangePass(
             @RequestParam("password") String newPass,
             @RequestParam("confirmPassword") String confirmPass,
             Authentication authentication,
-            RedirectAttributes redirectAttributes,
             HttpSession session) {
-        String email = authentication.getName();
-        profileEditService.preChangePass(newPass, confirmPass, email);
+        profileEditService.preChangePass(newPass, confirmPass, authentication.getName());
         session.setAttribute("newPass", newPass);
-        redirectAttributes.addFlashAttribute("operationType", "password_change");
-        return "redirect:/home/profile/verification";
+        return ResponseEntity.ok().body(Map.of("operationType", "password_change"));
     }
 
     @PostMapping("/verification/password_change")
@@ -121,10 +119,10 @@ public class ProfileEditController {
     }
 
     @PostMapping("/2fa")
-    public String manage2FA(Authentication authentication, RedirectAttributes redirectAttributes) {
+    @ResponseBody
+    public ResponseEntity<?> manage2FA(Authentication authentication) {
         profileEditService.manage2FA(authentication.getName());
-        redirectAttributes.addFlashAttribute("highlightContainerName", "twoFA-container");
-        return "redirect:/home/profile";
+        return ResponseEntity.ok().body(Map.of("highlightContainerName", "twoFA-container"));
     }
 
     @PostMapping("/photo_change")

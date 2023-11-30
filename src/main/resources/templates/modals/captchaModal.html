@@ -1,0 +1,26 @@
+<div th:fragment="captchaModal" class="captchaModal" id="captchaModal">
+    <div class="captchaModal-content">
+        <div class="icon-container">
+            <img th:src="@{/images/bot.png}" alt="Bot Icon" class="icon">
+        </div>
+        <p id="captchaModal-text">Пожалуйста, подтвердите, что Вы не робот. Введите ответ на следующий пример: <br><br>
+            <span id="num1"></span> <span class="plus">+</span> <span id="num2"></span> <span class="equals">= ?</span>
+        </p>
+
+        <!-- Блок для сообщения об ошибке -->
+        <div class="modalError-message" id="captchaError" style="display: none;"></div>
+
+        <form th:action="${action == 'reg' ? '/registration/confirmCaptcha' : '/forgot_password/confirmCaptcha'}" method="post" class="captcha-form">
+            <input type="text" id="captcha" name="captcha" required placeholder="Ответ">
+            <input type="hidden" name="num1" th:value="${num1}">
+            <input type="hidden" name="num2" th:value="${num2}">
+            <div class="buttonsModal">
+                <button type="submit" class="send-answer">Отправить</button>
+                <button type="button" class="back-captcha" onclick="closeModal('captchaModal')">Назад</button>
+            </div>
+
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

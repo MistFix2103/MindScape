@@ -7,7 +7,7 @@
         <p id="nameModal-text">Введите Ваше имя:</p>
 
         <!-- Блок для сообщения об ошибке -->
-        <div th:if="${nameError}" class="error-message" th:text="${nameError}" id="nameError"></div>
+        <div class="error-message" id="profileError" style="display: none;"></div>
 
         <form th:action="@{/home/profile/change-name}" method="post" class="form-container">
             <input type="text" id="username" name="name" placeholder="Ваше имя">

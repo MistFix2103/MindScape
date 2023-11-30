@@ -53,5 +53,10 @@ public class CustomExceptions {
     public static class IncorrectNameException extends RuntimeException {
         private final String message = "Имя может содержать только буквы!";
     }
+
+    @Getter
+    public static class IncorrectCaptchaCodeException extends RuntimeException {
+        private final String message = "Неверный ответ! Попробуйте еще раз.";
+    }
 }
 

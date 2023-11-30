@@ -7,7 +7,7 @@
         <p id="passModal-text">Введите новый пароль:</p>
 
         <!-- Блок для сообщения об ошибке -->
-        <div th:if="${passError}" class="error-message" th:text="${passError}" id="passError"></div>
+        <div class="error-message" id="profileError" style="display: none;"></div>
 
         <form th:action="@{/home/profile/pass_change}" method="post" class="form-container">
             <input type="password" id="password" name="password" required placeholder="Новый пароль">

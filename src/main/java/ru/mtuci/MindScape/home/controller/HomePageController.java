@@ -50,7 +50,11 @@ public class HomePageController {
     }
 
     @GetMapping("/profile/verification")
-    public String showVerificationPage(){
+    public String showVerificationPage(HttpSession session, Model model){
+        Optional<String> newMail = Optional.ofNullable((String) session.getAttribute("newMail"));
+        Optional<String> newPass = Optional.ofNullable((String) session.getAttribute("newPass"));
+        newMail.ifPresent(mail -> model.addAttribute("operationType", "mail_change"));
+        newPass.ifPresent(pass -> model.addAttribute("operationType", "password_change"));
         return "verification";
     }
 }

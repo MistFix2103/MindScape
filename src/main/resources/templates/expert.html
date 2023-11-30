@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
-    <!-- Подключение css-файла и иконки -->
+    <!-- Подключение css-файлов и иконки -->
     <link rel="stylesheet" th:href="@{/css/expert.css}">
     <link rel="icon" th:href="@{/images/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/captchaModal.css}">
      <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
@@ -21,9 +22,9 @@
         </div>
 
         <!-- Блок для сообщения об ошибке -->
-        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+        <div class="error-message" id="error" style="display: none;"></div>
 
-        <form th:action="${userType == 'expert'} ? @{/registration/expert} : @{/registration/researcher}" method="post" enctype="multipart/form-data">
+        <form th:action="${userType == 'expert'} ? @{/registration/expert} : @{/registration/researcher}" method="post" enctype="multipart/form-data" class="registration-form">
             <!-- Поля для ввода информации -->
             <div class="reg-box">
                 <input type="text" id="username" name="name" required placeholder="Ваше имя">
@@ -69,6 +70,10 @@
             </div>
         </form>
     </div>
+
+    <!-- Добавляем модальное окно для капчи и скрипты -->
+    <div th:replace="~{modals/captchaModal :: captchaModal}"></div>
     <script src="/js/expert_reg.js"></script>
+    <script src="/js/captcha.js"></script>
 </body>
 </html>

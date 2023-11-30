@@ -81,15 +81,10 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 14px;
-    display: none;
     margin-top: -5px;
     margin-bottom: 5px;
     align-self: flex-start;
     margin-left: 50px;
-}
-
-.emailModal .error-message.active {
-    display: block;
 }
 
 .buttonsModal {

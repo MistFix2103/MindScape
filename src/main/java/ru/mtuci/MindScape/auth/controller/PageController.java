@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,7 +22,8 @@ public class PageController {
     }
 
     @GetMapping("/login/forgot_password")
-    public String showPassRecoverPage() {
+    public String showPassRecoverPage(Model model) {
+        model.addAttribute("action", "pass");
         return "forgot_password";
     }
 
@@ -30,21 +32,17 @@ public class PageController {
         return "registration";
     }
 
-    @GetMapping("/registration/user")
-    public String showUserRegistrationPage() {
-        return "user";
-    }
-
-    @GetMapping("/registration/expert")
-    public String showExpertRegistrationPage(Model model) {
-        model.addAttribute("userType", "expert");
-        return "expert";
-    }
-
-    @GetMapping("/registration/researcher")
-    public String showResearcherRegistrationPage(Model model) {
-        model.addAttribute("userType", "researcher");
-        return "expert";
+    @GetMapping("/registration/{userType}")
+    public String showUserRegistrationPage(@PathVariable String userType, Model model) {
+        model.addAttribute("action", "reg");
+        return switch (userType) {
+            case "user" -> "user";
+            case "expert", "researcher" -> {
+                model.addAttribute("userType", "expert");
+                yield "expert";
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + userType);
+        };
     }
 
     @GetMapping("/registration/verification")

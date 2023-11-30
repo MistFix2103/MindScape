@@ -33,7 +33,6 @@ import ru.mtuci.MindScape.user.repository.UserRepository;
 @AllArgsConstructor
 @Getter
 public class PassRecoverService {
-
     private final UserRepository userRepository;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -45,7 +44,6 @@ public class PassRecoverService {
         String pass = passRecoverDto.getPassword();
         String confirmPass = passRecoverDto.getConfirmPassword();
         userService.validateEmailAndPass(email, pass, confirmPass);
-        userService.createAndSendCode(email, "recover");
     }
 
     @Transactional

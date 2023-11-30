@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional<User> userOpt = userRepository.findByEmail(email);
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-           String role = String.valueOf(user.getRole());
+            String role = String.valueOf(user.getRole());
             List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
             return new org.springframework.security.core.userdetails.User(
                     user.getEmail(),

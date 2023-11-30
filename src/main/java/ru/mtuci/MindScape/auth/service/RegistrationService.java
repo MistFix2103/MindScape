@@ -21,7 +21,6 @@ package ru.mtuci.MindScape.auth.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +33,8 @@ import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 
 @Service
 @AllArgsConstructor
-@Getter
 public class RegistrationService {
-    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
-    private final EmailService emailService;
     private final UserRepository userRepository;
 
     public void preRegister(HttpSession session) {
@@ -52,6 +48,7 @@ public class RegistrationService {
         if (!username.matches("^[\\p{L}\\s]+$")) {
             throw new IncorrectNameException();
         }
+
         if (userRepository.findByEmail(email).isPresent()) {
             throw new EmailExistsException();
         }
@@ -63,7 +60,6 @@ public class RegistrationService {
         if (!regDto.getPassword().equals(regDto.getConfirmPassword())) {
             throw new PasswordsDoNotMatchException();
         }
-        userService.createAndSendCode(email, regDto.getRole());
     }
 
     @Transactional
@@ -71,7 +67,6 @@ public class RegistrationService {
         UserRegistrationDto regDto = (UserRegistrationDto) session.getAttribute("DTO");
         User user = new User();
         String role = regDto.getRole();
-
         user.setUsername(regDto.getName());
         user.setEmail(regDto.getEmail());
         user.setPassword(passwordEncoder.encode(regDto.getPassword()));

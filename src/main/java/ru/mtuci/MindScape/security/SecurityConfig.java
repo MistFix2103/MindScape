@@ -5,6 +5,7 @@
  * <p>Поля:</p>
  * <ul>
  *     <li>userDetailsService: Сервис для работы с данными пользователя.</li>
+ *     <li>loginController: Контроллер, обрабатывающий вход в систему.</li>
  * </ul>
  *
  * <p>Методы:</p>
@@ -17,7 +18,6 @@
 
 package ru.mtuci.MindScape.security;
 
-import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -33,12 +33,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ru.mtuci.MindScape.user.model.User;
-import ru.mtuci.MindScape.user.repository.UserRepository;
-
-import java.util.Optional;
+import ru.mtuci.MindScape.auth.service.LoginService;
 
 @Configuration
 @EnableWebSecurity
@@ -46,7 +42,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
-    private final UserRepository userRepository;
+    private final LoginService loginService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -64,18 +60,7 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/home", true)
                         .successHandler(((request, response, authentication) -> {
-                            Optional<User> user = userRepository.findByEmail(authentication.getName());
-                            if (user.get().isTwo_step()) {
-                                response.sendRedirect("/login/2fa");
-                            } else {
-                                CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-                                if (csrfToken != null) {
-                                    Cookie cookie = new Cookie("XSRF-TOKEN", csrfToken.getToken());
-                                    cookie.setPath("/");
-                                    response.addCookie(cookie);
-                                }
-                                response.sendRedirect("/home");
-                            }
+                            loginService.authorizeUser(response, authentication);
                         }))
                        )
                 .logout(form -> form

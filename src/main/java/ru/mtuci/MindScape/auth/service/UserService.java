@@ -8,11 +8,14 @@
  *     <li><b>generateSixDigitCode</b> - Генерирует 6-значный код.</li>
  *     <li><b>validateCode</b> - Проверяет корректность и актуальность кода, который ввел пользователь. Если все проверки прошли, код удаляется.</li>
  *     <li><b>validateEmailAndPass</b> - Проверяет корректность введенной почты и пароля.</li>
+ *     <li><b>checkCaptcha</b> - Проверяет, верный ли ответ на капчу был дан пользователем.</li>
+ *     <li><b>generateCaptcha</b> - Генерирует 2 числа для капчи</li>
  * </ul>
  */
 
 package ru.mtuci.MindScape.auth.service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,8 +25,10 @@ import ru.mtuci.MindScape.user.repository.ConfirmationCodeRepository;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 
@@ -90,5 +95,21 @@ public class UserService {
         if (passwordEncoder.matches(pass, user.get().getPassword())) {
             throw new NewPassCanNotMatchOldPassException();
         }
+    }
+
+    public void checkCaptcha(int num1, int num2, int answer, String role, String email) {
+        if ((num1 + num2) == answer) {
+            createAndSendCode(email, role);
+        } else {
+            throw new IncorrectCaptchaCodeException();
+        }
+    }
+
+    public Map<String, Integer> generateCaptcha(HttpSession session) {
+        int num1 = ThreadLocalRandom.current().nextInt(10, 50);
+        int num2 = ThreadLocalRandom.current().nextInt(10, 50);
+        session.setAttribute("num1", num1);
+        session.setAttribute("num2", num2);
+        return Map.of("num1", num1, "num2", num2);
     }
 }

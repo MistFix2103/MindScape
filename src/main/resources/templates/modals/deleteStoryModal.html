@@ -1,0 +1,18 @@
+<!-- Модальное окно для удаления истории -->
+<div th:fragment="deleteModal" class="deleteModal" id="deleteModal">
+    <div class="delModal-content">
+        <div class="delModal-body">
+            <i class="fas fa-exclamation-circle fa-lg"></i>
+            <p id="caution">Вы уверены, что хотите удалить историю? Это действие нельзя будет отменить.</p>
+        </div>
+        <div class="button-block">
+            <form th:action="@{/home/deleteStory}" method="post">
+                <input type="hidden" id="deleteStoryId" name="storyId">
+                <button type="submit" class="delete">Удалить</button>
+                <!-- CSRF token -->
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            </form>
+            <button type="button" class="back" onclick="closeModal('deleteModal')">Назад</button>
+        </div>
+    </div>
+</div>

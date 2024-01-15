@@ -1,0 +1,21 @@
+<div th:fragment="storyModal" class="storyModal" id="storyModal">
+    <div class="storyModal-content">
+        <div class="storyHeader">
+            <img th:src="@{/images/pen.png}" alt="pen" class="pen">
+            <span class="text" id="text">Написать историю</span>
+        </div>
+        <form class="story-form" id="story-form" method="post" th:action="@{/home/addStory}">
+            <div class="area">
+                <textarea id="storyText" name="story" rows="4" cols="50" maxlength="5000" placeholder="Напишите вашу историю здесь..."></textarea>
+            </div>
+            <div class="story-buttons">
+                <button type="submit" id="send-story" class="send-story">Опубликовать</button>
+                <button type="button" class="back-story" onclick="closeModal('storyModal')">Закрыть</button>
+            </div>
+            <input type="hidden" id="editStoryId" name="storyId">
+            <input type="hidden" id="editStoryText" name="storyText">
+            <!-- CSRF token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>

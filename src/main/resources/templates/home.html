@@ -7,12 +7,45 @@
     <!-- Подключение css-файла и иконки -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/storyModal.css}">
     <link rel="icon" href="images/favicon.ico">
-    <!-- Шрифт -->
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Добавляем шапку -->
+    <!-- Добавляем шапку и окно создания историй -->
     <div th:replace="~{/header :: header}"></div>
+    <div th:replace="~{modals/storyModal :: storyModal}"></div>
+
+    <!-- Блок с кнопками "Написать историю", "Черновики", "Мои истории" -->
+    <div class="story-write-buttons">
+        <button class="write-story" onclick="openModal('storyModal')">
+            <img th:src="@{/images/pen1.png}" alt="write" class="write-story-icon">
+            Написать историю
+        </button>
+        <a class="draft-story" th:href="@{home/drafts}">
+            <img th:src="@{/images/draft.png}" alt="draft" class="draft-story-icon">
+            Черновики
+        </a>
+        <a class="my-stories" th:href="@{home/my-stories}">
+            <img th:src="@{/images/my.png}" alt="my" class="my-story-icon">
+            Мои истории
+        </a>
+    </div>
+
+    <!-- Блок с историями -->
+    <div id="stories-container" class="stories-container">
+        <div th:each="story : ${stories}" class="story-block">
+            <div class="author-info">
+                <img th:src="${story.author.imageBase64}" alt="Avatar" class="avatar">
+                <span class="author-name" th:text="${story.author.username}"></span>
+                <span class="publish-time" th:text="${#temporals.format(story.time, 'dd.MM.yyyy HH:mm')}"></span>
+            </div>
+            <p class="story-text" th:text="${story.text}"></p>
+        </div>
+    </div>
+
+    <script src="/js/home.js"></script>
 </body>
 </html>

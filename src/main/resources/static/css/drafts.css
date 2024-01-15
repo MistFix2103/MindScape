@@ -1,0 +1,123 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url('../images/home.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    position: absolute;
+    left: 18.45vw;
+    top: 10.6vh;
+}
+
+.drafts-container {
+    position: absolute;
+    left: 18.3vw;
+    top: 15.9vh;
+    width: 57.66vw;
+}
+
+.drafts-block {
+    border: 1px solid #e0e0e0;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: box-shadow 0.7s ease;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.drafts-block:hover {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.story-header {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left, .right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.publish-time {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 2px;
+}
+
+.draft-label {
+    font-size: 14px;
+    color: red;
+    margin-top: -1px;
+}
+
+.delete-draft, .edit-draft {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    margin-right: 7px;
+}
+
+.delete-draft:hover, .edit-draft:hover {
+    transform: scale(1.07);
+}
+
+.story-text {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 15px;
+    margin-left: 7px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+.no-stories-message {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666;
+    position: absolute;
+    left: 25.1vw;
+    top: 10.6vh;
+}

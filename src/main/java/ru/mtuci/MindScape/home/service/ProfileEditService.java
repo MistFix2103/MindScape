@@ -38,6 +38,7 @@ import ru.mtuci.MindScape.user.model.User;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import static ru.mtuci.MindScape.exceptions.CustomExceptions.*;
 
@@ -99,6 +100,8 @@ public class ProfileEditService {
         User user = userRepository.findByEmail(email).get();
         byte[] imageBytes = image.getBytes();
         user.setImage(imageBytes);
+        String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        user.setImageBase64("data:image/png;base64," + imageBase64);
         userRepository.save(user);
     }
 

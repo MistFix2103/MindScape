@@ -4,10 +4,129 @@ body, html {
 }
 
 body {
-    background-color: white;
+    background-image: url('../images/home.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+.story-write-buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100px;
+    right: 150px;
+    gap: 15px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.write-story, .draft-story, .my-stories {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.draft-story, .my-stories {
+    text-decoration: none;
+}
+
+.my-stories {
+    margin-bottom: -3px;
+}
+
+.write-story:hover, .draft-story:hover, .my-stories:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.write-story-icon, .draft-story-icon, .my-story-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: bottom;
+}
+
+.stories-container {
+    position: absolute;
+    left: 18.3vw;
+    top: 11.26vh;
+    width: 47.48vw;
+}
+
+.story-block {
+    border: 1px solid #e0e0e0;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.story-block:hover {
+    transform: scale(1.03);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.author-info {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    vertical-align: bottom;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.publish-time {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 11px;
+}
+
+.author-name {
+    margin-top: 10px;
+}
+
+.story-text {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 15px;
+    margin-left: 7px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.5;
 }

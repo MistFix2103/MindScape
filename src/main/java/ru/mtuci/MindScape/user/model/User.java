@@ -52,4 +52,8 @@ public class User {
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB ")
     private byte[] image;
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String imageBase64;
 }

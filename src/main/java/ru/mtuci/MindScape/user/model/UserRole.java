@@ -29,7 +29,8 @@ import static java.util.stream.Collectors.toSet;
 public enum UserRole {
     USER(Set.of(Permission.READ)),
     EXPERT(Set.of(Permission.READ)),
-    RESEARCHER(Set.of(Permission.READ));
+    RESEARCHER(Set.of(Permission.READ)),
+    ADMIN(Set.of(Permission.READ,Permission.WRITE,Permission.MODIFICATION));
 
     private final Set<Permission> permissions;
 

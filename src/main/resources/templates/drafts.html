@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключение css-файла и иконки -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/drafts.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/deleteAccountModal.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/modals/storyModal.css}">
+    <link rel="icon" href="/images/favicon.ico">
+    <title>Черновики</title>
+</head>
+<body>
+    <!-- Шапка и модальные окна-->
+    <div th:replace="~{/header :: header}"></div>
+    <div th:replace="~{modals/storyModal :: storyModal}"></div>
+    <div th:replace="~{modals/deleteStoryModal :: deleteModal}"></div>
+
+    <h1 class="title">Черновики:</h1>
+
+    <!-- Блок с черновиками -->
+    <div id="drafts-container" class="drafts-container">
+        <div th:each="story : ${stories}" class="drafts-block">
+            <div class="story-header">
+                <div class="left">
+                    <img th:src="${story.author.imageBase64}" alt="Avatar" class="avatar">
+                    <span class="author-name" th:text="${story.author.username}"></span>
+                    <span class="publish-time" th:text="${#temporals.format(story.time, 'dd.MM.yyyy HH:mm')}"></span>
+                    <span class="draft-label">Черновик</span>
+                </div>
+                <div class="right">
+                    <img th:src="@{/images/edit.png}" alt="edit" class="edit-draft" th:data-text="${story.text}" th:data-id="${story.id}" onclick="openModal(this, 'storyModal')">
+                    <img th:src="@{/images/delete.png}" alt="delete" class="delete-draft" th:data-id="${story.id}" onclick="openModal(this, 'deleteModal')">
+                </div>
+            </div>
+            <p class="story-text" th:text="${story.text}"></p>
+        </div>
+        <div th:if="${#lists.isEmpty(stories)}" class="no-stories-message">
+            Здесь пока ничего нет...
+        </div>
+    </div>
+    <script src="/js/draft.js"></script>
+</body>
+</html>

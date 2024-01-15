@@ -1,10 +1,9 @@
 package ru.mtuci.MindScape.story.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import ru.mtuci.MindScape.home.service.StoryService;
+import ru.mtuci.MindScape.user.model.User;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -19,14 +18,19 @@ public class Story {
     private UUID id;
 
     @NotBlank
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String text;
 
-    //@ManyToOne
-    //@JoinColumn(name = "author_id")
-    //private User author;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
 
     //@OneToMany(mappedBy = "story")
     //private Set<Comment> comments;
+
+    @Enumerated(value = EnumType.STRING)
+    private StoryStatus status;
 
     private LocalDateTime time;
 }

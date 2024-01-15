@@ -60,7 +60,7 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/home", true)
                         .successHandler(((request, response, authentication) -> {
-                            loginService.authorizeUser(response, authentication);
+                            loginService.authorizeUser(response, authentication, request);
                         }))
                        )
                 .logout(form -> form

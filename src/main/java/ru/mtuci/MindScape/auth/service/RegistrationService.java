@@ -71,6 +71,7 @@ public class RegistrationService {
         user.setEmail(regDto.getEmail());
         user.setPassword(passwordEncoder.encode(regDto.getPassword()));
         user.setRole(UserRole.valueOf(role.toUpperCase()));
+        user.setImageBase64("/images/user_logo.png");
         if (!role.equals("user")) {
             user.setDocument(regDto.getDocument());
             user.setVerified(false);

@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
             PasswordsDoNotMatchException.class,
             NewPassCanNotMatchOldPassException.class,
             IncorrectNameException.class,
-            NameIsTooLongException.class,
+            NameIsTooLongException.class
     })
     @ResponseBody
     public ResponseEntity<?> handleCredentialsExceptions(Exception e) {

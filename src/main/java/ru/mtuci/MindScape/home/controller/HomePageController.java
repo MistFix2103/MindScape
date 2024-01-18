@@ -92,8 +92,17 @@ public class HomePageController {
                 } catch (IOException | InterruptedException | URISyntaxException e) {
                     e.printStackTrace(); // Обработка ошибок
                 }
+
+                // Цензурируем текст перед добавлением в модель
+                try {
+                    String censoredText = WebPurifyCensorship.censorText(story.getText());
+                    story.setText(censoredText);
+                } catch (IOException | InterruptedException | URISyntaxException e) {
+                    e.printStackTrace(); // Обработка ошибок
+                }
             });
         }
+
         model.addAttribute("stories", stories);
         model.addAttribute("username", username);
     }

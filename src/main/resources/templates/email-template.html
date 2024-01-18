@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {font-family: "Montserrat", sans-serif; font-size: 14px; font-weight: 400; color: #333;}
+        .container {width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 12px;}
+        .logo {width: 110px; height: 80px;}
+        .header {display: flex; flex-direction: column; align-items: center;}
+        .title {font-size: 22px; font-weight: 600;}
+        .content {padding: 10px;}
+        .code {font-size: 20px; margin: 30px 0; margin-left: 43%;}
+        .footer {color: #aaa; text-align: center; font-size: 14px;}
+        hr {color: #ccc; width: 100%}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="https://i.imgur.com/dxOD3DR.png" class="logo" alt="logo">
+        <p class="title" th:text="${title}"></p>
+    </div>
+    <hr>
+    <div class="content">
+        <p th:text="${text1}"></p>
+        <p th:text="${text2}"></p>
+        <p class="code" th:text="${code}"></p>
+        <p>Код действителен 10 минут.</p>
+        <p>Если Вы считаете, что письмо пришло по ошибке, проигнорируйте его.</p>
+    </div>
+    <div class="footer">
+        <p>© MindScape, 2024</p>
+    </div>
+</div>
+</body>
+</html>

@@ -42,7 +42,7 @@
                 <span class="author-name" th:text="${story.author.username}"></span>
                 <span class="publish-time" th:text="${#temporals.format(story.time, 'dd.MM.yyyy HH:mm')}"></span>
             </div>
-            <p class="story-text" th:text="${story.text}"></p>
+            <pre class="story-text" th:attr="data-full-text=${story.text}" th:text="${story.text}" style="white-space: pre-wrap;"></pre>
         </div>
     </div>
 

@@ -18,6 +18,12 @@
     <div th:replace="~{modals/deleteStoryModal :: deleteModal}"></div>
     <div th:replace="~{modals/storyModal :: storyModal}"></div>
 
+    <!-- Кнопка "На главную" -->
+    <a th:href="@{/home}" class="home-button">
+        <img th:src="@{/images/back.png}" alt="Home" id="home-icon">
+        <span class="home-text">На главную</span>
+    </a>
+
     <h1 class="title">Мои истории:</h1>
 
     <!-- Блок с историями -->
@@ -34,7 +40,7 @@
                     <img th:src="@{/images/delete.png}" alt="delete" class="delete-story" th:data-id="${story.id}" onclick="openModal(this, 'deleteModal')">
                 </div>
             </div>
-            <p class="story-text" th:text="${story.text}"></p>
+            <pre class="story-text" th:attr="data-full-text=${story.text}" th:text="${story.text}" style="white-space: pre-wrap;"></pre>
         </div>
         <div th:if="${#lists.isEmpty(stories)}" class="no-stories-message">
             Здесь пока ничего нет...

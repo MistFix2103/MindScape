@@ -79,13 +79,6 @@ public class HomePageController {
         List<Story> stories = (status.equals(StoryStatus.PUBLISHED))
                                             ? storyRepository.findAllByStatusOrderByTimeDesc(status)
                                             : storyRepository.findByAuthor_IdAndStatus(id, StoryStatus.DRAFT);
-        if (status.equals(StoryStatus.PUBLISHED)) {
-            stories.forEach(story -> {
-                if (story.getText().length() > 300) {
-                    story.setText(story.getText().substring(0, 300) + "...");
-                }
-            });
-        }
         model.addAttribute("stories", stories);
         model.addAttribute("username", username);
     }

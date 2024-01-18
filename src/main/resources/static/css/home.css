@@ -19,10 +19,13 @@ body {
 
 .story-write-buttons {
     display: flex;
+    width: 16.96vw;
+    height: 25.1vh;
     flex-direction: column;
-    position: absolute;
-    top: 100px;
-    right: 150px;
+    position: fixed;
+    top: 13.24vh;
+    right: 12.17vw;
+    z-index: 1000;
     gap: 15px;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -71,7 +74,7 @@ body {
 
 .stories-container {
     position: absolute;
-    left: 18.3vw;
+    left: 16.3vw;
     top: 11.26vh;
     width: 47.48vw;
 }
@@ -80,14 +83,13 @@ body {
     border: 1px solid #e0e0e0;
     margin-top: 15px;
     cursor: pointer;
-    transition: transform 0.7s ease, box-shadow 0.7s ease;
+    transition: box-shadow 0.7s ease;
     padding: 10px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
 .story-block:hover {
-    transform: scale(1.03);
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
 
@@ -122,11 +124,7 @@ body {
     font-family: 'Comfortaa', sans-serif;
     font-size: 15px;
     margin-left: 7px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: normal;
     line-height: 1.5;
+    overflow: hidden;
 }

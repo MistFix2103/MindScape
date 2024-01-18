@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import java.util.Map;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -55,7 +57,7 @@ class EmailServiceTest_long {
     void sendMessage_CorrectParametersPassed() {
         String to = "test@example.com";
         String subject = "Test Subject";
-        String text = "Test Message";
+        Map<String, Object> text = Map.of("key", "Test Message"); // Замени это на реальные значения
 
         emailService.sendMessage(to, subject, text);
 

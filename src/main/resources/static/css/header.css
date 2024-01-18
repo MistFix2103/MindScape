@@ -1,5 +1,6 @@
 .header {
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
     display: flex;
@@ -30,18 +31,10 @@
 
 .container {
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 70px;
     display: flex;
     flex-direction: row;
     gap: 10px;
-}
-
-.buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 1px 5px;
 }
 
 .custom-button {
@@ -73,15 +66,16 @@
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
     position: absolute;
-    right: 30px;
+    right: 50px;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 1002;
     top: 100%;
     display: flex;
     flex-direction: column; 
     align-items: center;
+    border-radius: 10px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -93,18 +87,43 @@
 
 .dropdown-content a, #logout {
     text-decoration: none;
-    padding: 12px;
+    padding: 10px 20px;
+    margin: 5px;
     color: black;
-    transition: color 0.4s ease;
+    transition: color 0.6s ease;
     border: none;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 16px;
     background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s;
 }
 
-.dropdown-content a:hover, #logout:hover {
-    color: rgb(160, 160, 160);
+.dropdown-content a::before, #logout::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 0.8px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    background-color: #333;
+    transition: transform 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+.dropdown-content a:hover::before, #logout:hover::before {
+    visibility: visible;
+    transform: translateX(-50%) scaleX(1);
+}
+
+.dropdown-logout, .dropdown-profile {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: bottom;
 }
 
 #logo {

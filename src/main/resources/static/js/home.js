@@ -4,6 +4,27 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
+    document.querySelectorAll('.story-block').forEach(block => {
+        const textElement = block.querySelector('.story-text');
+        const fullText = textElement.getAttribute('data-full-text');
+
+        if (fullText.length > 300) {
+            const shortenedText = fullText.substring(0, 300) + '...';
+            const showMoreSpan = document.createElement('span');
+            showMoreSpan.textContent = ' Показать';
+            showMoreSpan.style.color = 'blue';
+            showMoreSpan.style.cursor = 'pointer';
+            showMoreSpan.style.fontFamily = "'Comfortaa', sans-serif";
+            showMoreSpan.style.fontSize = '15px';
+
+            textElement.textContent = shortenedText;
+            textElement.appendChild(showMoreSpan);
+
+            showMoreSpan.addEventListener('click', () => {
+                textElement.textContent = fullText;
+            });
+        }
+    });
 });
 
 function openModal() {

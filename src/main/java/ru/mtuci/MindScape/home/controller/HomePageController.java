@@ -18,6 +18,8 @@ import ru.mtuci.MindScape.story.repository.StoryRepository;
 import ru.mtuci.MindScape.user.model.User;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -77,16 +79,23 @@ public class HomePageController {
 
     private void prepareStories(Model model, StoryStatus status, String username, UUID id) {
         List<Story> stories = (status.equals(StoryStatus.PUBLISHED))
-                                            ? storyRepository.findAllByStatusOrderByTimeDesc(status)
-                                            : storyRepository.findByAuthor_IdAndStatus(id, StoryStatus.DRAFT);
+                ? storyRepository.findAllByStatusOrderByTimeDesc(status)
+                : storyRepository.findByAuthor_IdAndStatus(id, StoryStatus.DRAFT);
+
         if (status.equals(StoryStatus.PUBLISHED)) {
             stories.forEach(story -> {
-                if (story.getText().length() > 300) {
-                    story.setText(story.getText().substring(0, 300) + "...");
+
+                // Цензурируем текст перед добавлением в модель
+                try {
+                    String censoredText = WebPurifyCensorship.censorText(story.getText());
+                    story.setText(censoredText);
+                } catch (IOException | InterruptedException | URISyntaxException e) {
+                    e.printStackTrace(); // Обработка ошибок
                 }
             });
         }
         model.addAttribute("stories", stories);
         model.addAttribute("username", username);
     }
+
 }

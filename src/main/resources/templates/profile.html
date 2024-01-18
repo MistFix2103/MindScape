@@ -22,6 +22,12 @@
     <!-- Включаем шапку -->
     <div th:replace="~{/header :: header}"></div>
 
+    <!-- Кнопка "На главную" -->
+    <a th:href="@{/home}" class="home-button">
+        <img th:src="@{/images/back.png}" alt="Home" id="home-icon">
+        <span class="home-text">На главную</span>
+    </a>
+
     <!-- Блок для изменения изображения профиля -->
     <div class="profile-image-block">
         <p>Ваше изображение профиля:</p>

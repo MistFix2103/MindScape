@@ -17,13 +17,54 @@ body {
     to   { opacity: 1; }
 }
 
+.home-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    position: absolute;
+    left: 2.7vw;
+    top: 11.24vh;
+    gap: 8px;
+}
+
+#home-icon {
+    transition: transform 0.3s ease;
+    width: 25px;
+    height: 25px;
+    top: -2px;
+}
+
+.home-text {
+    display: inline-block;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, color 1.2s ease, opacity 0.3s ease;
+    margin-left: 10px;
+    opacity: 0;
+    color: black;
+}
+
+.home-button:hover .home-text {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+.home-button:hover #home-icon {
+    transform: translateX(5px) scale(1.05);
+}
+
 .title {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 24px;
     position: absolute;
     left: 18.45vw;
-    top: 10.6vh;
+    top: 11.6vh;
 }
 
 .stories-container {
@@ -97,13 +138,9 @@ body {
     font-family: 'Comfortaa', sans-serif;
     font-size: 15px;
     margin-left: 7px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: normal;
     line-height: 1.5;
+    overflow: hidden;
 }
 
 .no-stories-message {

@@ -68,7 +68,8 @@ public class RegistrationController {
         UserRegistrationDto regDto = (UserRegistrationDto) session.getAttribute("DTO");
         String role = regDto.getRole();
         userService.checkCaptcha((int) session.getAttribute("num1"), (int) session.getAttribute("num2"), Integer.parseInt(answer), role, regDto.getEmail());
-        return ResponseEntity.ok(Map.of("role", role));
+        Map<String, Object> response = Map.of("role", "someDefaultValue");
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/verification")

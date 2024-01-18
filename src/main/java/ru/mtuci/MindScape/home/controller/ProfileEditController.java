@@ -37,7 +37,6 @@ import ru.mtuci.MindScape.home.service.ProfileEditService;
 import ru.mtuci.MindScape.user.repository.UserRepository;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
